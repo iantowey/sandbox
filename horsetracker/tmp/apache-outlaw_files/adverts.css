@@ -1,0 +1,24 @@
+/* @media all{ */
+.advert{position:relative}
+.advert a:hover{background:none!important}
+.advert--banner{position:fixed;}
+.advert--banner,.advert--banner>.advert__container{min-width:320px;margin:auto;line-height:0}
+.advert--banner>div:after{content:none}
+.advert--banner-wrap{width:100%;text-align:center;padding:15px 0;background:#eaeaea;margin-bottom:6px;line-height:0}
+.advert--mpu,.advert--mpu>.advert__container{width:300px;min-height:250px;margin-left:auto;margin-right:auto;line-height:0}
+.advert--mpu--singlecol{display:none;margin-top:18px}
+.advert--promo{width:300px;min-height:250px;margin-left:auto;margin-right:auto;line-height:0}
+.advert__container,#leaderboard{position:relative} /* } */
+#advert-leaderboard{width:728px;}
+
+/* advert--banner should only show > 767px */
+@media all and (max-device-width:767px) {
+    .advert--banner,.advert--banner>.advert__container {
+        display:inline-block;
+    }
+}
+
+/* @media all and (min-width:1000px){ */
+.advert--mpu~.is-hidden--if-after-double-height-mpu>.promo-block__item:nth-child(n+3){display:none}
+.advert--mpu-standard-height~.is-hidden--if-after-double-height-mpu>.promo-block__item:nth-child(n+3){display:table}/* } */
+.advert--skyscraper{padding: 11px;width: 120px;margin: -12px 0 0 8px;}

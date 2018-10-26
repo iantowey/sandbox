@@ -1,0 +1,24 @@
+using url as pk persist crawled pages to couchbase
+
+    - creawler process to live outside of express app
+    - schedule task, every 5 minutes check todays racecard for updates
+    - check already crawled v hash
+    - put exipry date on page , time after which we dont want to check for updates
+    - update entire records in couchbase on page change, ottoman
+    - push events to kafka
+    - build neo graph
+
+    crawler task
+        - todays racecard/yesterdays
+        - every 10 minutes
+        - check page hash
+        - url pk
+        - flag on object indicting to stop crawling
+
+    event generator
+        - producer
+            - create topic content from crawled
+        - consumer
+            - filter topic to my stable
+
+    oddschecker analysis

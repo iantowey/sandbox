@@ -1,0 +1,4 @@
+        window.__switch_passback_obj = {"z":2874,"i":"0","l":"3k30fd52ndsmjf226dmq13hgq7s7","c":"9qh9a0j930ch25rv1nq1bpoequ","b":null,"p":0,"token":"T_2028faet19ejo25sbl972nkiasg"};
+        var response = {"zone_id":2874,"instance_id":"0","load_id":"3k30fd52ndsmjf226dmq13hgq7s7","chain_id":"9qh9a0j930ch25rv1nq1bpoequ","banner_id":false,"token":"T_2028faet19ejo25sbl972nkiasg","context":[],"type":"render","meta":{"website":[]},"node":"delivery17.e.switchadhub.com","creative":""};
+        if(typeof __switch_obj !== 'undefined'){ __switch_obj.renderFriendly( response ); }
+        else{ (__switch_friendly_render_queue = window.__switch_friendly_render_queue || []).push( response ); }
