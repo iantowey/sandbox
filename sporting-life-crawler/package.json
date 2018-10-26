@@ -1,0 +1,43 @@
+{
+  "name": "sporting-life-crawler",
+  "version": "1.0.0",
+  "description": "Crawl sporting life",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ros23232323:R0sc0mm0n@github.com/ros23232323/sandbox.git"
+  },
+  "keywords": [
+    "crawler"
+  ],
+  "author": "Ian Towey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ros23232323/sandbox/issues"
+  },
+  "homepage": "https://github.com/ros23232323/sandbox#readme",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
+    "cheerio": "^0.20.0",
+    "cookie-parser": "^1.4.1",
+    "crypto": "0.0.3",
+    "dateformat": "^1.0.12",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "mocha": "^2.4.5",
+    "morgan": "^1.7.0",
+    "neo4j": "^2.0.0-RC2",
+    "node-crontab": "0.0.8",
+    "ottoman": "^1.0.3",
+    "request": "^2.70.0",
+    "serve-favicon": "^2.3.0",
+    "underscore": "^1.8.3",
+    "url": "^0.11.0"
+  }
+}

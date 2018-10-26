@@ -1,0 +1,25 @@
+{
+  "couchbase":{
+    "server":"localhost",
+    "bucket":"horsetracker-test",
+    "bucket_password":"password",
+    "connection_timeout":15000
+  },
+  "kafka":{
+    "url":"localhost",
+    "port":"",
+    "username":"",
+    "password":""
+  },
+  "cron":{
+    "racecard":"* * * * *"
+  },
+  "sporting_life_com":{
+    "url":"http://www.sportinglife.com",
+    "racecard":{
+      "url":"/racing/racecards/{dt}",
+      "url_dt_path_param_format":"dd-mm-yyyy"
+    },
+    "max_timeout": 15000
+  }
+}
