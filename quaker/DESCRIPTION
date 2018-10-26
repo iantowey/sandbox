@@ -1,0 +1,27 @@
+Package: quaker
+Type: Package
+Title: The quaker API allows users to retrieve, analyse and visualize global
+    seismic activity
+Version: 0.1.1
+Author: 04128591
+Maintainer: <04128591@ucd.ie>
+Description: Provides and API to downloads, analysis and plot seismic data from
+    USGS.
+License: GPL (>=2)
+LazyData: TRUE
+Imports:
+    dplyr,
+    jsonlite,
+    magrittr,
+    tidyr,
+    rCharts,
+    stats,
+    tibble,
+    ROCR,
+    shiny,
+    leaflet
+RoxygenNote: 5.0.1
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

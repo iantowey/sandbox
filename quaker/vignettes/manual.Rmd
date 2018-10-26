@@ -1,0 +1,117 @@
+---
+title: "quaker manual"
+author: "Ian Towey"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The **_quaker_** API allows users to retrieve, analyse and visualize global seismic activity. The data used is available on the [Earthquake Hazards Program](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) sections of the USGS website.
+
+## quaker package info
+
+The `quaker` API exposes 6 functions.
+
+1. get_seismic_data(timeFrame, minMagnitude)
+  * returns a [GeoJson](http://geojson.org/) formatted document of global seismic activity
+2. get_freq_grp_by_day_mag(geoJson)
+  * Returns summary information ina dataframe of frequency grouped by magnitude by day
+3. get_freq_grp_by_country_mag(geoJson)
+  * returns a dataframe of frequency grouped by magnitude by country
+4. flatten_to_table(geoJson)
+  * returns a data frame containing fields 'longtiude','latitude','depth','magnitude','tsunami' , 'time'
+5. fit_quaker(geoJson)
+  * fits a logistic regression model $$tsunami \sim longtiude + latitude + depth + magnitude$$, returns a list of objects including model fit and anova objects
+6. plot(geoJson)
+  * Plots an object of type seismic_geojson. Using leaflet creates map of the world with pins at the correct latitude/longtitude for each earthquake in the geoJson object. Each pin has a toop tip which when clicked provides futher information on the seismic event.
+
+
+
+## Example 1
+
+Download all the seismic events records by the USGS for the past month with magnitude greater than 2.5 on the Richter scale.
+Group the the frequency by country and magnitude and order by total number of seismic events per country descending.
+```{r, echo=FALSE, include=FALSE}
+library(quaker)
+library(dplyr)
+```
+
+Gr
+```{r}
+data <- get_seismic_data(timeFrame = 'PAST_MONTH', minMagnitude = '2.5')
+grp_by_cntry_mag <- get_freq_grp_by_country_mag(data)
+grp_by_cntry_mag = grp_by_cntry_mag %>% arrange(desc(total)) %>% head
+```
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(grp_by_cntry_mag)
+```
+
+## Example 2
+
+Download all the seismic events records by the USGS for the past week with any magnitude. Group the the frequency by day and
+magnitude and order by total number of seismic events per day descending.
+
+
+```{r}
+data <- get_seismic_data(timeFrame = 'PAST_WEEK', minMagnitude = 'all')
+grp_by_day_mag <- get_freq_grp_by_day_mag(data)
+```
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(grp_by_day_mag)
+```
+
+## Example 3
+
+Download all the seismic events records by the USGS for the past week with any magnitude. Flatten the Geojson object to data frame for ease of manupulation
+Returning the fields
+
+  + _longtiude_ : Decimal degrees longitude. Negative values for western longitudes.
+  + _latitude_  : Decimal degrees latitude. Negative values for southern latitudes.
+  + _depth_     : Depth of the event in kilometers.
+  + _magnitude_ : The magnitude for the event.
+  + _tsunami_   : Indicator warning indicator
+  + _time_      : Time when the event occurred. Times are reported in milliseconds since the epoch
+
+```{r}
+data <- get_seismic_data(timeFrame = 'PAST_WEEK', minMagnitude = 'all')
+data_flat <- flatten_to_table(data)
+```
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(data_flat))
+```
+
+## Example 4
+
+Download all the seismic events records by the USGS for the past month with any magnitude. Fit a logistic regression
+$$tsunami \sim longtiude + latitude + depth + magnitude$$
+
+  ```{r}
+data <- get_seismic_data(timeFrame = 'PAST_MONTH', minMagnitude = 'all')
+model.fit <- fit_quaker(data)
+
+```
+
+```{r}
+model.fit$fit
+```
+
+```{r}
+model.fit$fit.anova
+```
+
+## Example 5
+
+Download all the seismic events records by the USGS for the past week with magnitude greater than 2.5. Plot map of world with pins showsing event location
+and pin tooltip with more details of the event
+
+
+```{r, eval=FALSE}
+this_week_2_5 <- get_seismic_data(timeFrame = 'PAST_WEEK', minMagnitude = '2.5')
+plot(this_week_2_5)
+```
