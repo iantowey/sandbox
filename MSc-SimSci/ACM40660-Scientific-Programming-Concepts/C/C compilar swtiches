@@ -1,0 +1,8 @@
+https://mulholland.xyz/notes/c/
+
+
+-I 		adds the given path to the include search path, which the compiler searches for header files you #include d in your code.
+-L 		adds to the library search path.
+-o 		compiled object name
+-l 		include library, order matters
+

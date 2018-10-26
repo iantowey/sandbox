@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7D39EAA6-763E-40F8-A7D6-C3445CE7AF56}</ProjectGuid>
+    <Compiler>
+      <Compiler ctype="GccCompiler" />
+    </Compiler>
+    <Language>C</Language>
+    <Target>Bin</Target>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug</OutputPath>
+    <OutputName>sandbox</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <LibPaths>
+      <LibPaths>
+        <LibPath>${ProjectDir}</LibPath>
+        <LibPath>${CombineDir}</LibPath>
+        <LibPath>/home/ian/Desktop/ACM40660-Scientific-Programming-Concepts/assignment2/sandbox/sandbox/sandbox</LibPath>
+      </LibPaths>
+    </LibPaths>
+    <Includes>
+      <Includes>
+        <Include>/home/ian/Desktop/ACM40660-Scientific-Programming-Concepts/assignment2/sandbox/sandbox/sandbox</Include>
+      </Includes>
+    </Includes>
+    <Libs>
+      <Libs>
+        <Lib>m</Lib>
+      </Libs>
+    </Libs>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <OutputName>sandbox</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <OptimizationLevel>3</OptimizationLevel>
+    <DefineSymbols>MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="assignment2.h" />
+    <None Include="assignment2_tests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="main.c" />
+    <Compile Include="assignment2.c" />
+    <Compile Include="assignment2_tests.c" />
+  </ItemGroup>
+</Project>

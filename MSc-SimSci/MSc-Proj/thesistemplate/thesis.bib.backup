@@ -1,0 +1,64 @@
+@article{main,
+    author =       "Lennon {\'O} N{\'a}raigh",
+    title =        "Modelling the growth rate of a tracer gradient using stochastic differential equations",
+    journal =      "European Journal of Mechanics B/Fluids",
+    volume =       "30",
+    number =       "1",
+    pages =        "89-98",
+    year =         "2011",
+    DOI =          "10.1016/j.euromechflu.2010.10.00"
+}
+
+@article{lilly,
+    author =       "D.K. Lilly",
+    title =        "Numerical simulation of two-dimensional turbulence,  (1969) ",
+    journal =      "The Physics of Fluids Supplement II",
+    pages =        "240-249",
+    year =         "1969"
+}
+
+@article{align,
+    author = {Lapeyre, Guillaume and Klein, P and L. Hua, B},
+    year = {1999},
+    month = {12},
+    pages = {3729-3737},
+    title = {Does the tracer gradient vector align with the strain eigenvectors in 2D turbulence?},
+    volume = {11},
+    booktitle = {Physics of Fluids - PHYS FLUIDS}
+}
+
+@article{stretch,
+    author = "Lennon {\'O} N{\'a}raigh",
+    title = "Stretching revisited"
+}
+
+@article{main,
+    author =       "Lennon {\'O} N{\'a}raigh",
+    title =        "Modelling the growth rate of a tracer gradient using stochastic differential equations",
+    journal =      "European Journal of Mechanics B/Fluids",
+    volume =       "30",
+    number =       "1",
+    pages =        "89-98",
+    year =         "2011",
+    DOI =          "10.1016/j.euromechflu.2010.10.00"
+}
+
+@BOOK{risken,
+  TITLE = {The Fokker-Planck Equation: Methods of Solutions and Applications, 2nd ed},
+  AUTHOR = {Risken, H},
+  YEAR = {1989}, 
+  PUBLISHER = {Springer},
+}
+
+@misc{bowman,
+    author    = "Scott Hottovy",
+    title     = "The Fokker-Planck Equation",
+    url       = "http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf",
+    year      = "2011",
+}
+
+@misc{bowman,
+    author    = "John C. Bowman",
+    title     = "How Important is Dealiasing for Turbulence Simulations?",
+    url       = "http://www.math.ualberta.ca/~bowman/talks/alias.pdf"
+}

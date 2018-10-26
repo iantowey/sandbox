@@ -1,0 +1,9 @@
+Application to simulate 'Collatz Conjecture'
+
+to build
+
+>make
+
+to run
+
+>./collatz_app 50

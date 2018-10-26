@@ -1,0 +1,30 @@
+\contentsline {chapter}{List of Figures}{iv}{chapter*.3}
+\contentsline {chapter}{List of Tables}{v}{chapter*.4}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Theory and Methods}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Vorticity}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Advection-Diffusion equation \& relation to vorticity}{6}{section.2.2}
+\contentsline {section}{\numberline {2.3}Orientation Dynamics}{7}{section.2.3}
+\contentsline {section}{\numberline {2.4}Stochastic Differential Equations Model}{11}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Fokker-Planck}{12}{subsection.2.4.1}
+\contentsline {subsubsection}{Fokker-Planck numerical scheme}{14}{section*.5}
+\contentsline {section}{\numberline {2.5}Using Uncertainty Quantification methods to fit Fokker-Planck parameters}{14}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Monte Carlo}{15}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Stochastic Collocation Method}{15}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Stochastic Galerkin Method}{15}{subsection.2.5.3}
+\contentsline {chapter}{\numberline {3}Results}{16}{chapter.3}
+\contentsline {section}{\numberline {3.1}Euler Maruyama}{16}{section.3.1}
+\contentsline {section}{\numberline {3.2}Direct Numerical Simulation}{17}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}DNS vorticity and advection}{17}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}DNS statistically steady}{17}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}DNS probability density functions, X and $\Lambda $}{17}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Fokker-Planck numerical solution}{19}{section.3.3}
+\contentsline {chapter}{\numberline {4}Discussion}{21}{chapter.4}
+\contentsline {chapter}{References}{22}{chapter*.12}
+\contentsline {chapter}{\numberline {A}First Appendix}{23}{appendix.A}
+\contentsline {chapter}{\numberline {B}Code}{24}{appendix.B}
+\contentsline {section}{\numberline {B.1}Class SDEModelSolve}{25}{section.B.1}
+\contentsline {section}{\numberline {B.2}Class FokkerPlankSolve}{28}{section.B.2}
+\contentsline {section}{\numberline {B.3}Class VorticitySolve}{34}{section.B.3}
+\contentsline {section}{\numberline {B.4}Class VorticitySolvePostProcessing}{39}{section.B.4}
+\contentsline {section}{\numberline {B.5}Run simulations and plot generations commands}{46}{section.B.5}

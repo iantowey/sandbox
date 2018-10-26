@@ -1,0 +1,49 @@
+\begin{thebibliography}{10}
+
+\bibitem{mixing-wiki}
+Mixing (process engineering).
+
+\bibitem{fluid-mixing}
+Fluid mixing equipment.
+\newblock {\em Industrial \& Engineering Chemistry}, 49(3):42A--52A, 1957.
+
+\bibitem{uqm}
+Study in modern uncertainty quantification methods.
+\newblock 2012.
+
+\bibitem{bowman}
+John~C. Bowman.
+\newblock How important is dealiasing for turbulence simulations?
+
+\bibitem{hottovy}
+Scott Hottovy.
+\newblock The fokker-planck equation, 2011.
+
+\bibitem{align}
+Guillaume Lapeyre, P~Klein, and B~L.~Hua.
+\newblock Does the tracer gradient vector align with the strain eigenvectors in
+  2d turbulence?
+\newblock 11:3729--3737, 12 1999.
+
+\bibitem{lilly}
+D.K. Lilly.
+\newblock Numerical simulation of two-dimensional turbulence, (1969).
+\newblock {\em The Physics of Fluids Supplement II}, pages 240--249, 1969.
+
+\bibitem{stretch}
+Lennon~{\'O} N{\'a}raigh.
+\newblock Stretching revisited.
+
+\bibitem{main}
+Lennon~{\'O} N{\'a}raigh.
+\newblock Modelling the growth rate of a tracer gradient using stochastic
+  differential equations.
+\newblock {\em European Journal of Mechanics B/Fluids}, 30(1):89--98, 2011.
+
+\bibitem{risken}
+H~Risken.
+\newblock {\em The Fokker-Planck Equation: Methods of Solutions and
+  Applications, 2nd ed}.
+\newblock Springer, 1989.
+
+\end{thebibliography}

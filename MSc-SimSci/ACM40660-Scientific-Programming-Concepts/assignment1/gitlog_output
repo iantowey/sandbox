@@ -1,0 +1,143 @@
+On branch master
+nothing to commit, working tree clean
+commit d6c50018bd24cdf37bc2608be5e1b1a34121a6fa
+Author: iantowey <iantowey@gmail.com>
+Date:   Fri Feb 2 22:39:59 2018 +0000
+
+    fix bug due to typo in assignment details
+
+ 3_simpson_rule/compile_run.sh |  6 ++--
+ 3_simpson_rule/simpson.c      | 78 +++++++++++++++++++++----------------------
+ 4_integration/main.c          |  2 +-
+ 3 files changed, 43 insertions(+), 43 deletions(-)
+
+commit 1aac65277bae3c716467ea0347583a8ed4123bdd
+Merge: 5674598 1c0ae8d
+Author: iantowey <iantowey@gmail.com>
+Date:   Wed Jan 24 07:46:44 2018 +0000
+
+    Merge branch 'feature/simpson-rule'
+
+commit 1c0ae8dcb6bf37a2172349a4bf35cd066d4a6729
+Author: iantowey <iantowey@gmail.com>
+Date:   Wed Jan 24 07:46:31 2018 +0000
+
+    comments
+
+ 3_simpson_rule/main.c    |  2 +-
+ 3_simpson_rule/simpson.c | 10 ++++++----
+ 2 files changed, 7 insertions(+), 5 deletions(-)
+
+commit 56745981600a0e667cdb4588afbfde48b72b07e1
+Merge: 6a2d0ec d4b5c0a
+Author: iantowey <iantowey@gmail.com>
+Date:   Wed Jan 24 07:41:46 2018 +0000
+
+    Merge branch 'feature/determinant'
+
+commit d4b5c0aac4a94ed12d2a1a9ae86c5879e3f2eb10
+Author: iantowey <iantowey@gmail.com>
+Date:   Wed Jan 24 07:41:35 2018 +0000
+
+    comment
+
+ 2_determinant/main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6a2d0ec65d4e1efa25a2b969d56c13b67d14e8a0
+Merge: c3ebd04 ce030df
+Author: iantowey <iantowey@gmail.com>
+Date:   Wed Jan 24 07:40:12 2018 +0000
+
+    fix conflict
+
+commit ce030df86d4acbe71a33d4ee0f73bea3b453b2f2
+Author: iantowey <iantowey@gmail.com>
+Date:   Wed Jan 24 07:38:16 2018 +0000
+
+    added comments
+
+ 1_collatz_conjecture/collatz.c | 18 ++++++++++++++++++
+ 1_collatz_conjecture/main.c    |  3 +++
+ 2 files changed, 21 insertions(+)
+
+commit c3ebd047826f8380cf53334dc109ec6d880723f7
+Author: iantowey <iantowey@gmail.com>
+Date:   Wed Jan 24 07:32:40 2018 +0000
+
+    integration methods
+
+ 4_integration/Makefile       |  57 ++++++++++++++++++++
+ 4_integration/README         |  11 ++++
+ 4_integration/common.h       |  12 +++++
+ 4_integration/compile_run.sh |  18 +++++++
+ 4_integration/gauss.c        |  10 ++++
+ 4_integration/gauss.h        |   7 +++
+ 4_integration/integration.h  |   3 ++
+ 4_integration/main.c         | 123 +++++++++++++++++++++++++++++++++++++++++++
+ 4_integration/simpson.c      |  21 ++++++++
+ 4_integration/simpson.h      |   7 +++
+ 4_integration/trapezoid.c    |  18 +++++++
+ 4_integration/trapezoid.h    |   7 +++
+ 12 files changed, 294 insertions(+)
+
+commit 3fcfeb556f2bd271cef6cce3dc825aa61f659e98
+Author: iantowey <iantowey@gmail.com>
+Date:   Mon Jan 22 23:31:53 2018 +0000
+
+    Simpsons Integration Method
+
+ 3_simpson_rule/Makefile       | 57 +++++++++++++++++++++++++++++++++++
+ 3_simpson_rule/README         |  7 +++++
+ 3_simpson_rule/compile_run.sh | 21 +++++++++++++
+ 3_simpson_rule/main.c         | 12 ++++++++
+ 3_simpson_rule/simpson.c      | 69 +++++++++++++++++++++++++++++++++++++++++++
+ 3_simpson_rule/simpson.h      | 12 ++++++++
+ 6 files changed, 178 insertions(+)
+
+commit 0e28bcfa1c39e564decf1c3844ddcd21cf530a32
+Author: iantowey <iantowey@gmail.com>
+Date:   Mon Jan 22 10:43:59 2018 +0000
+
+    fix memory leak
+
+ 2_determinant/README         |  7 +++++++
+ 2_determinant/compile_run.sh | 18 ++++++++++++++++++
+ 2_determinant/det.c          |  5 ++++-
+ 3 files changed, 29 insertions(+), 1 deletion(-)
+
+commit 0efbfd7913e76826368868f90f885d8df57f6513
+Author: iantowey <iantowey@gmail.com>
+Date:   Mon Jan 22 10:35:07 2018 +0000
+
+    determinant calculations inital commit
+
+ 2_determinant/Makefile |  57 +++++++++++++++++++++++
+ 2_determinant/det.c    | 121 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 2_determinant/det.h    |  23 ++++++++++
+ 2_determinant/main.c   |  12 +++++
+ 4 files changed, 213 insertions(+)
+
+commit 4c9798eae3852d4999dfb018cc80962f352f6f2c
+Author: iantowey <iantowey@gmail.com>
+Date:   Fri Jan 19 08:59:01 2018 +0000
+
+    Collatz Sequence initial commit
+
+ 1_collatz_conjecture/Makefile       | 56 +++++++++++++++++++++++++
+ 1_collatz_conjecture/README         |  9 ++++
+ 1_collatz_conjecture/collatz.c      | 82 +++++++++++++++++++++++++++++++++++++
+ 1_collatz_conjecture/collatz.h      | 26 ++++++++++++
+ 1_collatz_conjecture/compile_run.sh | 22 ++++++++++
+ 1_collatz_conjecture/main.c         | 12 ++++++
+ 6 files changed, 207 insertions(+)
+
+commit d9978a74420d1eb1652d933394e7444f22b06418
+Author: iantowey <iantowey@gmail.com>
+Date:   Fri Jan 19 08:55:30 2018 +0000
+
+    master branch init
+
+ .gitignore | 2 ++
+ README     | 1 +
+ 2 files changed, 3 insertions(+)

@@ -1,0 +1,95 @@
+\documentclass{ucdgradtaughtthesis}
+
+%\usepackage[demo]{graphicx}
+%\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{pdfpages}
+
+% Some useful symbols
+\usepackage{amssymb}
+
+% Need this for align environment
+\usepackage{amsmath}
+
+\usepackage{array}
+
+% Colour fixme's red and bold
+\usepackage{color}
+\newcommand{\fixme}[1]{\textcolor{red}{\textbf{#1}}}
+
+% Hyperref
+%\usepackage[colorlinks=true,urlcolor=blue,linktocpage=true]{hyperref} 
+\usepackage[colorlinks=true,urlcolor=black,menucolor=black,linkcolor=black,filecolor=black,citecolor=black]{hyperref} 
+
+\lstdefinestyle{custom_py_style}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,    
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange}
+}
+
+
+% Front Matter
+\title{Thesis title}
+\author{Ian Towey}
+
+\degree{MSc Data and Computational Science}
+
+\college{Science}
+\school{School of Mathematics and Statistics\\and\\Supervisor's School (if different)}
+
+\supervisor{Supervisor Name\\&Second Supervisor Name (if applicable)}
+
+\thesisdate{\today}
+
+\begin{document}
+
+% Front pages. Turn headers off for these.
+\pagestyle{plain}
+
+\maketitle
+
+\include{abstract}
+\include{acknowledgments}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Normal Chapters. Switch to arabic numbers and turn headers on
+\clearpage
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\include{intro}
+\include{theory}
+\include{results}
+\include{discussion}
+
+% Appendices.
+\renewcommand{\chaptername}{Appendix}
+\appendix
+\include{appendix1}
+
+% Code listings
+\include{code}
+
+% Bibliography.
+\bibliographystyle{apsrev}
+\lhead{}
+\bibliography{thesis}
+
+\end{document}

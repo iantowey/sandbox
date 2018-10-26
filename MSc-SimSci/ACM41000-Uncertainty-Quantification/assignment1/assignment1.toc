@@ -1,0 +1,18 @@
+\select@language {english}
+\contentsline {section}{\numberline {0}Introduction}{2}
+\contentsline {section}{\numberline {1}Analytic analysis \textit {x}- and \textit {y}- equations alone}{2}
+\contentsline {section}{\numberline {2}Solve fot y(t)}{3}
+\contentsline {section}{\numberline {3}Quick view of $\frac {\mathsf {d}z}{\mathsf {d}t}$}{3}
+\contentsline {section}{\numberline {4}Rescaling to reduce the number of constants}{3}
+\contentsline {section}{\numberline {5}Fixed points / stability analysis of $\frac {\mathsf {d}u}{\mathsf {d}\tau }$}{4}
+\contentsline {section}{\numberline {6}Analysis of parameter $b$}{6}
+\contentsline {section}{\numberline {7}Numerically solutions}{7}
+\contentsline {section}{\numberline {8}Full SIR model}{11}
+\contentsline {subsection}{\numberline {8.1}Show $N = x + y + z$ is a constant}{11}
+\contentsline {subsection}{\numberline {8.2}Show $x = N, y = z = 0$ is fixed point}{11}
+\contentsline {subsection}{\numberline {8.3}Compute the Jacobian with the fixed point, Compute the eigenvalues of the Jacobian}{11}
+\contentsline {subsection}{\numberline {8.4}Fixed point stability}{11}
+\contentsline {section}{Appendices}{12}
+\contentsline {section}{Appendices}{12}
+\contentsline {section}{\numberline {A}Python Code}{12}
+\contentsline {section}{\numberline {B}Maxima Code}{14}

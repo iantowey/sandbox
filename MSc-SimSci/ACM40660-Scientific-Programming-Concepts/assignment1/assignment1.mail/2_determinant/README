@@ -1,0 +1,7 @@
+Determinant calculation
+
+#build
+make clean && make
+
+#run
+./det_app

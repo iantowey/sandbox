@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Context}{2}{0}{1}
+\beamer@sectionintoc {2}{Mathematical modelling}{4}{0}{2}
+\beamer@sectionintoc {3}{Convection}{16}{0}{3}
+\beamer@sectionintoc {4}{Two-layer model}{28}{0}{4}
+\beamer@sectionintoc {5}{Sieve cooler}{35}{0}{5}
+\beamer@sectionintoc {6}{Conclusions}{38}{0}{6}

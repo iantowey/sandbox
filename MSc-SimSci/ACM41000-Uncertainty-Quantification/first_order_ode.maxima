@@ -1,0 +1,186 @@
+#############################################################################################################
+##########http://maxima.sourceforge.net/docs/tutorial/en/gaertner-tutorial-revision/Pages/ODE0001.htm
+#############################################################################################################
+
+##Chapter 1
+f(x) :=  exp(x) + 2;
+eqn_1 : 'diff(y,x) = f(x);
+sol_1 : ode2(eqn_1, y,x);
+plotdf(f(x),[trajectory_at,2,-0.1]);
+plotdf(f(x),[trajectory_at,0,-4]);
+
+
+
+subst([%c = -4],rhs(sol_1));
+plot2d(rhs (sol_1),[x,-4,4],[y,-10,10]);
+
+eqn_2 : 'diff(y,x) = exp(x) + 2;
+
+sol_2 : ode2(eqn_2,y,x);
+
+
+for a:-3 thru 26 step 7 do display(a);
+
+A2 : make_array (fixnum, 10);
+
+L : [];
+rearray(L,10);
+L[0] = 10;
+L[1] = 20;
+L[2] = 40;
+
+array(Q, flonum, 10);
+
+Q[1] : 10;
+arrayinfo(Q);
+
+for a: 0 thru 10 step 1 do 
+	display(a);
+
+
+n : 100;
+TIME : make_array (flonum, n); 
+VEL : make_array (flonum, n);
+for a: 0 thru (n-1) step 1 do
+	TIME[a] : a 
+	VEL[a] : (a, a);
+	
+
+#PLOT SLOPE FIELD AND SOME PARTICULAR SOLUTIONS
+http://maxima.sourceforge.net/docs/manual/de/maxima_66.html
+
+#integrator with steps
+https://www.symbolab.com/solver/integral-calculator/%5Cint%5Cfrac%7Bx%7D%7Bsqrt%5Cleft(1-x%5E%7B2%7D%5Cright)%7Ddx
+
+
+#page 25 of notes
+eqn_1 : 'diff(h,t) = a - b*cos(w*t) - k*h;
+ode2(eqn_1, h, t);
+
+
+eqn_1 : 'diff(v,t) = g - k/m*v;
+ans_1 :ode2(eqn_1, v, t);
+ic1(ans_1, t= 0, v= 0);
+ic1(ans_1, t= 0, v= 0, m = 64);
+
+m : 64;
+
+eqn_2 : 'diff(v,t) = 32 - k/64*v;
+ans_2 :ode2(eqn_2, v, t);
+ic1(ans_2, t= 0, v= 0);
+
+
+http://maxima.sourceforge.net/docs/manual/de/maxima_66.html
+#PLOT DIRECTION FIELD : y' = exp(-x)+y
+plotdf(exp(-x)+y,[trajectory_at,2,-0.1])
+
+eqn_3 : 'diff(v,t) = 1 / (1 - x^2);
+
+
+
+
+##body falling under gravity
+ode_1 : 'diff(v,t) = g - k/m*v;
+ode_2 : 'diff(v,t) = g - k/m*v^2;
+ode_3 : 'diff(v,t) = g - k/m*(v)^(1/2);
+
+sol_1 : ode2(ode_1, v, t);
+sol_2 : ode2(ode_2, v, t);
+sol_3 : ode2(ode_3, v, t);
+
+sol_1_ic : ic1(sol_1, t= 0, v= 0);
+sol_2_ic : ic1(sol_2, t= 0, v= 0);
+sol_3_ic : ic1(sol_3, t= 0, v= 0);
+
+v1(t) := 'rhs(sol_1);
+
+subst([m = 64, g = 32, k = 512],rhs(sol_1_ic));
+
+n : 10;
+TIME : make_array (flonum, n); 
+VEL : make_array (flonum, n);
+for a: 0 thru (n-1) step 1 do VEL[a] : subst([m = 64, g = 32, k = 512, t = a],rhs(sol_1_ic));
+
+
+
+ode_1 : 'diff(y,x) = exp(x)*sin(x);
+sol_1 : ode2(ode_1, y, x);
+
+ode_1 : 'diff(y,x) = 1/(1+x^2);
+sol_1 : ode2(ode_1, y, x);
+
+ode_1 : 'diff(T,t) = -k*(T-T0);
+sol_1 : ode2(ode_1, T, t);
+
+
+plot2d( [u^2,u^3],[u,0,2], [x, -.2, 2.5],[style, [lines,5,5],[lines,5,2]],[y,-1,4] );
+
+
+
+f(x) := exp(x)*sin(x);
+plot2d( [-1000  + f(x), f(x), 1000  + f(x), 2000  + f(x), 3000  + f(x)],[x,-10,12], [y, -3000, 10000],[style, [lines,1,1],[lines,1,2],[lines,1,3],[lines,1,4],[lines,1,5]]);
+plotdf(f(x),[trajectory_at,2,-0.1],[trajectory_at,1,-0.1]);
+
+f(x) := 1/2*exp(x)*(sin(x)-cos(x));
+plot2d( [-1000  + f(x), f(x), 1000  + f(x), 2000  + f(x), 3000  + f(x)],[x,-10,12], [y, -3000, 10000],[style, [lines,1,1],[lines,1,2],[lines,1,3],[lines,1,4],[lines,1,5]]);
+plotdf(f(x),[trajectory_at,2,-0.1],[trajectory_at,1,-0.1]);
+
+f(y) := y * cos(y);
+ode : 'diff(y,t) = f(y);
+sol : ode2(ode, y, t);
+plot2d( [-1  + f(x), f(x), 1  + f(x), 2  + f(x), 3  + f(x)],[x,-80,80], [y, -80, 80],[style, [lines,1,1],[lines,1,2],[lines,1,3],[lines,1,4],[lines,1,5]]);
+plotdf(f(x),[trajectory_at,2,-0.1],[trajectory_at,1,-0.1]);
+
+
+f(y) := y * (y - 1) * (1 - 0.5*y);
+ode : 'diff(y,t) = f(y);
+sol : ode2(ode, y, t);
+plot2d( [-1  + f(x), f(x), 1  + f(x), 2  + f(x), 3  + f(x)],[x,-5,5], [y, -5, 5],[style, [lines,1,1],[lines,1,2],[lines,1,3],[lines,1,4],[lines,1,5]]);
+plotdf(f(x),[trajectory_at,2,-0.1],[trajectory_at,1,-0.1]);
+
+
+a : 1000/999;
+b : 0.5;
+f(u) := a - b*u - exp(-u); 
+plotdf(f(x),[trajectory_at,2,-0.1],[trajectory_at,1,-0.1]);
+
+
+
+plotdf([y,a - b*x - exp(-x)], 
+        [parameters,"a=1000/999, b=0.5"],
+        [trajectory_at,1.05,-9],[tstep,0.01],
+        [w,-5,5], [direction,forward],
+        [nsteps,300], [sliders,"b=0:2"], [versus_t,1])
+
+
+plotdf(
+	[a - b*x - exp(-x)],
+     	[parameters,"a=1.2,b=0.5"],
+     	[sliders,"a=1:3:,b=0:5"],
+	[tstep,0.1],
+	[x,0,5],
+	[y,-5,5],
+	[direction,forward]
+);
+
+plotdf(
+	[a - b*u - exp(-u)],[u],
+     	[parameters,"a=1.2,b=0.5"],
+     	[sliders,"a=1:3:,b=0:5"],
+	[tstep,0.1],
+	[u,0,1000],
+	[y,-1000,1000],
+	[direction,forward]
+);
+
+
+plotdf(
+	[N - x0*exp(-k*x/l) - x],
+     	[parameters,"N=1000,x0=500,k=0.2,l=0.1"],
+     	[sliders,"a=1:2:,b=-5:5"],
+	[tstep,0.1],
+	[x,-5,5],
+	[y,-5,5],
+	[direction,forward],
+	[trajectory_at,-2,4]
+);

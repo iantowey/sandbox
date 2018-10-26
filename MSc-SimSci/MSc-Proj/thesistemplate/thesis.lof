@@ -1,0 +1,14 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces (a) Time series of the angle X mod 2$\pi $, (b) Time series of Lyapunov exponent\relax }}{16}{figure.caption.6}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces (a) The vorticity field $\omega $, (b) The concentration field $\theta $\relax }}{17}{figure.caption.7}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces $L^2$ norm of $\omega $ vs. simulation time\relax }}{18}{figure.caption.8}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces (a) The probability density function of the angle $X$, (b)The probability density function of the Lyaounov exponent extracted from the 2-d turbulence simulation\relax }}{19}{figure.caption.9}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces The marginal probability distribution got from the stationary solution to the Fokker-Planck equation, (a) joint marginal $x-y$, (b) joint marginal $Y-Z$\relax }}{19}{figure.caption.10}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces The distribution of the X-angles from Fokker-Planck (a) and The distribution of the Lyaounov exponents from Fokker-Planck (b)\relax }}{20}{figure.caption.11}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces \relax }}{23}{figure.caption.13}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces \relax }}{23}{figure.caption.14}
+\addvspace {10\p@ }

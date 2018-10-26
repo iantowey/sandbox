@@ -1,0 +1,8 @@
+\select@language {english}
+\contentsline {section}{\numberline {0}Matrix-Matrix Multiplication}{2}
+\contentsline {section}{\numberline {1}Q2}{4}
+\contentsline {section}{\numberline {2}Q3}{5}
+\contentsline {subsection}{\numberline {2.1}Parallelize code using synchronous directives}{5}
+\contentsline {subsection}{\numberline {2.2}Ran2 thread safe}{5}
+\contentsline {section}{Appendices}{8}
+\contentsline {section}{Appendices}{8}

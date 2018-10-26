@@ -1,0 +1,29 @@
+\BOOKMARK [0][-]{chapter*.3}{List of Figures}{}% 1
+\BOOKMARK [0][-]{chapter*.4}{List of Tables}{}% 2
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
+\BOOKMARK [0][-]{chapter.2}{Theory and Methods}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Vorticity}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.2}{Advection-Diffusion equation \046 relation to vorticity}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.3}{Orientation Dynamics}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.4}{Stochastic Differential Equations Model}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.4.1}{Fokker-Planck}{section.2.4}% 9
+\BOOKMARK [1][-]{section.2.5}{Using Uncertainty Quantification methods to fit Fokker-Planck parameters}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.5.1}{Monte Carlo}{section.2.5}% 11
+\BOOKMARK [2][-]{subsection.2.5.2}{Stochastic Collocation Method}{section.2.5}% 12
+\BOOKMARK [2][-]{subsection.2.5.3}{Stochastic Galerkin Method}{section.2.5}% 13
+\BOOKMARK [0][-]{chapter.3}{Results}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Euler Maruyama}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.2}{Direct Numerical Simulation}{chapter.3}% 16
+\BOOKMARK [2][-]{subsection.3.2.1}{DNS vorticity and advection}{section.3.2}% 17
+\BOOKMARK [2][-]{subsection.3.2.2}{DNS statistically steady}{section.3.2}% 18
+\BOOKMARK [2][-]{subsection.3.2.3}{DNS probability density functions, X and }{section.3.2}% 19
+\BOOKMARK [1][-]{section.3.3}{Fokker-Planck numerical solution}{chapter.3}% 20
+\BOOKMARK [0][-]{chapter.4}{Discussion}{}% 21
+\BOOKMARK [0][-]{chapter*.12}{References}{}% 22
+\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 23
+\BOOKMARK [0][-]{appendix.B}{Code}{}% 24
+\BOOKMARK [1][-]{section.B.1}{Class SDEModelSolve}{appendix.B}% 25
+\BOOKMARK [1][-]{section.B.2}{Class FokkerPlankSolve}{appendix.B}% 26
+\BOOKMARK [1][-]{section.B.3}{Class VorticitySolve}{appendix.B}% 27
+\BOOKMARK [1][-]{section.B.4}{Class VorticitySolvePostProcessing}{appendix.B}% 28
+\BOOKMARK [1][-]{section.B.5}{Run simulations and plot generations commands}{appendix.B}% 29

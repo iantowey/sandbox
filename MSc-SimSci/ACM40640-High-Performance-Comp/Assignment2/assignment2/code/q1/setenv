@@ -1,0 +1,2 @@
+module load dev intel/2015-u3
+qsub -I -l walltime=00:20:00 -l nodes=3:ppn=24 -N mma -j oe -r n -A ph5xx

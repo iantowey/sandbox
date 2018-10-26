@@ -1,0 +1,14 @@
+Assignment 2 Application
+
+to build
+
+>make
+
+to run
+
+>./assignment2 1
+>./assignment2 2
+>./assignment2 3
+>./assignment2 4
+>./assignment2 5
+>./assignment2 6

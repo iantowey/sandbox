@@ -1,0 +1,7 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Running Tests/Benchmarks}{2}
+\contentsline {section}{\numberline {2}Results}{2}
+\contentsline {subsection}{\numberline {2.1}Search}{2}
+\contentsline {subsection}{\numberline {2.2}Chopsearch}{3}
+\contentsline {subsection}{\numberline {2.3}Performance}{4}
+\contentsline {section}{\numberline {3}Complexity}{5}

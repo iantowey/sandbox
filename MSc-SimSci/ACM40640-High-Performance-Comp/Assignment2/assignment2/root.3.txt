@@ -1,0 +1,19 @@
+-->>3 sending '3' to 4
+
+4 received: '3' from 3			4 sending '7' to 5
+
+5 received: '7' from 4			5 sending '12' to 6
+
+6 received: '12' from 5			6 sending '18' to 0
+
+0 received: '18' from 6			0 sending '18' to 1
+
+1 received: '18' from 0			1 sending '19' to 2
+
+2 received: '19' from 1			2 sending '21' to 3
+
+<<--3 received '21' from 2
+
+
+Finished :: sum of ranks from 0 to 6 = 21 
+

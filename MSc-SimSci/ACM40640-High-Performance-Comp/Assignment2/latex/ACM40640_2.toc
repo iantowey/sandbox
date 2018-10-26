@@ -1,0 +1,4 @@
+\select@language {english}
+\contentsline {section}{\numberline {0}Communication in a ring}{2}
+\contentsline {section}{\numberline {1}Finding Determinent using Cramers Rule}{4}
+\contentsline {section}{\numberline {2}Finding Deadlock}{5}

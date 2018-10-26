@@ -1,0 +1,67 @@
+\documentclass[a4paper,10pt]{book}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\chapter{Introduction} \label{ch:intro}
+
+\section{new}
+  
+%state the general topic and give some background
+  This paper investigates properties of turbulent fluid flow. Turbulent fluid flow is a complex and requires advanced mathematics to describe this motion.
+  The motion of a fluid is usually though as of a group of unit fluid elements with similar physical properties, the mathematics is modelled on how the fluid motion effects a 
+  single fluid element. In a turbulent flow there is mixing of fluid particles, which are stretched, distorted and mixed in knots by the flow. In this setting,
+  the motion of the fluid element is highly irregular and statistical averages are used to describe the various properties of the fluid.
+  Turbulent fluid flow has important application in industrial mixing applications, examples outlined cite:mixing_wiki and cite:fluid\_mixing.
+      
+  This paper investigates using a stochastic model to describe the \textit{mixing/turbulent} motion of a passive tracer in a fluid flow. 
+  Rapid mixing or Turbulent flow is conventionally visualised as a cascade of large eddies breaking into successfully smaller eddies and the transfer of energy from these larger unstable eddies to smaller eddies.
+  A passive tracer (such as a dye) is any fluid property we can measure to track fluid flow that does not influence the properties of the flow.
+  Turbulent / mixing action stretches and distorts these fluid elements. The rate of stretching/distortion is described by a quantity known as the Lyapunov exponent. The solution to the stochastic model provides the 
+  probability density function of the Lyapunov exponent. 
+      
+  In cite:main, a model of the orientation dynamics is derived based on the alignment dynamics of the tracer gradient with the straining direction of the flow. 
+  The orientation dynamics model emerges from the standard advection-diffusion equation (ref eqn) for viscous fluids by introducting a vector field which describes the 
+  the gradient of the tracer. The eigenvalues and eigenvectors of the rate-of-strain tensor associated with the orientation dynamics model are the basis from which the stochastic model for the Lyapunov exponent PDF is found.
+  The stochastic fluctuations are modeled as as Ornstein-Uhlenbeck (OU) processes, this is an appropriate assumption as the analysis in cite:main introduces a external random forcing in the simulation. 
+  The Fokker-Planck partial differential equation associated with the stochastic model is presented, which describes the stationary solution of the stochastic model. 
+  The parameters of the Fokker-Planck were choosen via the moment of the vorticity and tracer concentration from the DNS. 
+  One of the aims of this project is to try and use uncertainty quanification methods to fite these parameters more accurately.
+
+  The aim of this paper is to fully explain the equations presented in cite:main , numerically solve the vorticity , advection diffusion and the Fokker-Planck equations. Reproducing the simulation results in cite:main and
+  use uncertainty quatification methods to fit the FP parameters more actually accurately.
+    
+  
+  The advection diffusion equation is outlined. vorticity transport equation which descibes two-dimensional turbulence is then introduced, this describes the angular velocity of the fluid element about the z-axis. These two equations are solved 
+  via direct numerical pesudo-spectral methods
+  
+  The vorticity equation is solved using a DNS pesudo-specrtal method , as is the Fokker-Planck PDE, the probabilty denstiy function of the orientation dynamics attributes are compared from the DNS and the Fokker-Planck
+  stationary solution. 
+   
+  
+  
+
+
+In fluid mechanics, studying how fluids mix is a fundemental issue. The models investigated here aim to computes the mixing coefficient for steady flows. 
+
+To visualize this in a flow, we could imagine two fluid elements in a turbulent flow moving along to two very close streamlines separating from each 
+other at a rate modelled by a linear quanity known as the Lyapunov exponent.  A positive Lyapunov exponent is usually taken as an indication that the system is chaotic, 
+and the fluid element experiences exponential stretching.  
+
+
+The computation of the Lyapunov exponent is based on a model of the alignment dynamics of the vorticity or tracer gradient with the compressional eigenvector of the symmetric part of the strain tensor.
+In \cite{align} the most probable angle of alignment is $\pi/2$, this means on average, the vorticity aligns with the compressive direction of the flow.
+This allows us compute the Lyapunov exponent using the corrosponding eigenvalue and the angle between the X-axis and the compressional eigenvector.
+
+Modelling this growth rate using direct numerical simulation (DNS) is computationally expensive, for this reason a system of stochastic differenetial equations identified in \cite{main}
+are used to model the angle between the X-axis and the compressional eigenvector and hense the Lyapunov exponent at a much cheaper computational cost.
+
+The probability density functions of the Lyapunov exponent  and the X-angle from the DNS and the stochastic model will be compared for agreement.
+
+This work is based on the \cite{main}. This work outlines the theory of the orientation dynanics , describing the alignment of the tracer dradient with the compressional direction of the flow. The equations for vorticity and 
+advection/diffusion used in the numerical simulation. Also the results of \cite{main} are reproduced.
+
+
+more..........
+
+\end{document}

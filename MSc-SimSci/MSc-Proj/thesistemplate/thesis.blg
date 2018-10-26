@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thesis.aux
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: acknowledgments.aux
+A level-1 auxiliary file: intro.aux
+A level-1 auxiliary file: theory.aux
+A level-1 auxiliary file: results.aux
+A level-1 auxiliary file: discussion.aux
+The style file: plain.bst
+A level-1 auxiliary file: appendix1.aux
+A level-1 auxiliary file: code.aux
+Database file #1: thesis.bib
+Repeated entry---line 35 of file thesis.bib
+ : @article{main
+ :              ,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in uqm
+Warning--to sort, need author or key in mixing-wiki
+Warning--to sort, need author or key in fluid-mixing
+Warning--empty author in fluid-mixing
+Warning--empty author in uqm
+Warning--empty journal in uqm
+Warning--empty journal in align
+Warning--empty journal in stretch
+Warning--empty year in stretch
+You've used 10 entries,
+            2118 wiz_defined-function locations,
+            549 strings with 4971 characters,
+and the built_in function-call counts, 2403 in all, are:
+= -- 224
+> -- 63
+< -- 1
++ -- 30
+- -- 18
+* -- 140
+:= -- 375
+add.period$ -- 23
+call.type$ -- 10
+change.case$ -- 38
+chr.to.int$ -- 0
+cite$ -- 19
+duplicate$ -- 106
+empty$ -- 238
+format.name$ -- 18
+if$ -- 520
+int.to.chr$ -- 0
+int.to.str$ -- 10
+missing$ -- 8
+newline$ -- 46
+num.names$ -- 14
+pop$ -- 61
+preamble$ -- 1
+purify$ -- 29
+quote$ -- 0
+skip$ -- 86
+stack$ -- 0
+substring$ -- 143
+swap$ -- 16
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 38
+warning$ -- 9
+while$ -- 19
+width$ -- 12
+write$ -- 87
+(There was 1 error message)

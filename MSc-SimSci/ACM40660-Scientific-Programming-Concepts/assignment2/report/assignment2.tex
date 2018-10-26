@@ -1,0 +1,232 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[titletoc, toc]{appendix}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{moreverb}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{ACM40660-Scientific-Programming-Concepts \\ Assignment 2}
+
+\author{Ian Towey \\ \\ 04128591}
+
+\date{\today}
+
+\lstdefinestyle{custom_py_style}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange}
+}
+
+\newenvironment{aside}
+  {\begin{mdframed}[style=0,%
+      leftline=false,rightline=false,leftmargin=2em,rightmargin=2em,%
+          innerleftmargin=0pt,innerrightmargin=0pt,linewidth=0.5pt,%
+      skipabove=7pt,skipbelow=7pt]\footnotesize}
+  {\end{mdframed}}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Running Tests/Benchmarks}
+
+To run the application
+
+\begin{verbatim}
+ cd code
+ make clean && make && clear
+ ./assignment2 $TEST_IDX
+\end{verbatim}  
+
+\par
+TEST\_IDX is integer in range $[1\-6]$  
+
+\begin{itemize}
+ \item 1) randomarray\_tests		
+ \item 2) bubblesort\_tests		
+ \item 3) bubblesort\_input\_tests			
+ \item 4) search\_tests		
+ \item 5) chopsearch\_tests	
+ \item 6) benchmark\_tests		
+\end{itemize}  
+
+\par
+Or execute shell scripts 
+
+\begin{itemize}
+ \item sh randomarray\_tests.sh		
+ \item sh bubblesort\_tests.sh		
+ \item sh bubblesort\_input\_tests.sh			
+ \item sh search\_tests.sh		
+ \item sh chopsearch\_tests.sh	
+ \item sh benchmark\_tests.sh		
+\end{itemize}
+
+  
+\section{Results}
+
+Run benchmark tests
+\begin{verbatim}
+cd code
+sh benchmark_tests.sh		
+\end{verbatim}
+
+\subsection{Search}
+\begin{verbatimtab}[4]
+**********************************************************************
+* search benchmark test
+**********************************************************************
+
+----------------------------------------------------------------------
+
+	Parameters:
+		'n'(length of array) 				:	2000
+		'max'(max random value) 			:	10000
+		's'(value to search array for) 			:	10
+		'mult'(number of iterations of sort to compute) :	1000000
+
+
+----------------------------------------------------------------------
+total time taken 	: 3117319.000 (CLOCKS_PER_SEC)
+avg time 		: 3.117319000 (CLOCKS_PER_SEC)
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+
+	Parameters:
+		'n'(length of array) 				:	2000
+		'max'(max random value) 			:	10000
+		's'(value to search array for) 			:	5000
+		'mult'(number of iterations of sort to compute) :	1000000
+
+
+----------------------------------------------------------------------
+total time taken 	: 3519216.000 (CLOCKS_PER_SEC)
+avg time 		: 3.519216000 (CLOCKS_PER_SEC)
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+
+	Parameters:
+		'n'(length of array) 				:	2000
+		'max'(max random value) 			:	10000
+		's'(value to search array for) 			:	9000
+		'mult'(number of iterations of sort to compute) :	1000000
+
+
+----------------------------------------------------------------------
+total time taken 	: 3937326.000 (CLOCKS_PER_SEC)
+avg time 		: 3.937326000 (CLOCKS_PER_SEC)
+----------------------------------------------------------------------
+**********************************************************************
+\end{verbatimtab}
+\subsection{Chopsearch}
+\begin{verbatimtab}[4]
+**********************************************************************
+* chopsearch benchmark test
+**********************************************************************
+
+----------------------------------------------------------------------
+
+	Parameters:
+		'n'(length of array) 				:	2000
+		'max'(max random value) 			:	10000
+		's'(value to search array for) 			:	10
+		'mult'(number of iterations of sort to compute) :	1000000
+
+
+----------------------------------------------------------------------
+total time taken 	: 3181894.000 (CLOCKS_PER_SEC)
+avg time 		: 3.181894000 (CLOCKS_PER_SEC)
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+
+	Parameters:
+		'n'(length of array) 				:	2000
+		'max'(max random value) 			:	10000
+		's'(value to search array for) 			:	5000
+		'mult'(number of iterations of sort to compute) :	1000000
+
+
+----------------------------------------------------------------------
+total time taken 	: 3169850.000 (CLOCKS_PER_SEC)
+avg time 		: 3.169850000 (CLOCKS_PER_SEC)
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+
+	Parameters:
+		'n'(length of array) 				:	2000
+		'max'(max random value) 			:	10000
+		's'(value to search array for) 			:	9000
+		'mult'(number of iterations of sort to compute) :	1000000
+
+
+----------------------------------------------------------------------
+total time taken 	: 3165580.000 (CLOCKS_PER_SEC)
+avg time 		: 3.165580000 (CLOCKS_PER_SEC)
+----------------------------------------------------------------------
+**********************************************************************
+\end{verbatimtab}[4]
+\subsection{Performance}
+
+\textit{Search} seems to have more variation in the benchmark. This is probably due to the position of the search target in the sorted array. The closer the search value is to the max possiblr random value in the array, 
+the more time it takes to find (or not find) the search value.
+
+When the search target is the value $10$, this value will probably be around position $2$ of the \textit{sorted} array of length $2000$, therfore average time taken is $3.117319$ clock cycle per seconds.
+
+When the search target is the value $5000$, this value will probably be around position $1000$ of the \textit{sorted} array of length $2000$, therfore average time taken is $3.519216$ clock cycle per seconds.
+
+When the search target is the value $9000$, this value will probably be around position $1800$ of the \textit{sorted} array of length $2000$, therfore average time taken is $3.937326$ clock cycle per seconds.
+
+This concerning if the array size is extremely large, as the performance of the algorithm will degrade with value for the search target
+
+\vspace{5mm}
+
+\textit{Chopsearch} has very little variation in the benchmark regardless of the position of the search target. This is due to the chopsearch algorithm feature of recursively checking if the search value is in the upper or lower 
+part of the array and at each iteration dicounts half of the array.
+
+When the search target is the value $10, 5000, 9000$, the average time taken is $3.181894, 3.16985, 3.16558$ clock cycle per seconds respectively. Chopsearch exhibits very little variation regardless of search value. This is a good trait 
+for the search algorithm, as we can expect constant performance that can be estimated very accurately regardless of array length and search value.
+
+Based on this analysis \textit{Chopsearch} is a better search algorithm then \textit{Search}.
+
+\section{Complexity}
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{4}{|c|}{Algorithm Complexity Performance} \\
+\hline
+ & Best & Worst & Average \\ \hline
+\textit{Search} & $\mathcal{O}(1)$ & $\mathcal{O}(n)$ & $\mathcal{O}(n/2)$ \\
+\textit{Chopsearch} & $\mathcal{O}(1)$ & $\mathcal{O}(\log{n})$ & $\mathcal{O}(\log{n})$ \\
+\hline
+\end{tabular}
+
+
+
+\end{document}

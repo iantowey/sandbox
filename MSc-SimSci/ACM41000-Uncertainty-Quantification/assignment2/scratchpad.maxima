@@ -1,0 +1,33 @@
+#even function g(x) = g(-x)
+#odd function g(-x) = -g(x)
+
+#odd function => cos summ will be 0 in expansion
+f(x) := x;  
+
+plot2d(f(x), [x,-%pi, %pi]);
+
+(declare(n,integer), assume(n > 0 ), facts() );
+
+define(b(n),integrate(x*sin(n*x),x,-%pi,%pi)/%pi );
+
+map(b,makelist(i,i,1,7));
+fs(nmax) := sum( b(m)*sin(m*x),m,1,nmax);
+map(fs,[1,2,3,4] );
+
+(load(draw), load(qdraw) );
+
+qdraw( xr(-5.6,5.6),yr(-4,4), ex([x,fs(1),fs(2)],x,-%pi,%pi),key(bottom) );
+
+qdraw( xr(-5.6,5.6),yr(-4,4),ex([x,fs(1),fs(2),fs(3),fs(4)],x,-%pi,%pi),key(bottom) );
+
+
+qdraw( xr(-5.6,5.6),yr(-4,4), ex([x,fs(1),fs(2),fs(3),fs(4)],x,-%pi,%pi),key(bottom) )
+
+
+fourier(x,x,2);
+
+ ( load(fourie),facts() );
+
+fourier(x,x,2);
+
+fourier(x^2,x,4);

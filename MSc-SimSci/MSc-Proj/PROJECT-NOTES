@@ -1,0 +1,46 @@
+Flow tracer		https://en.wikipedia.org/wiki/Flow_tracer
+gradient 		https://www.quora.com/What-is-meant-by-gradient-in-fluid-mechanics
+homogenious 		https://en.wikipedia.org/wiki/Homogeneity_(statistics) the dataset mean / varience are constant accross the flow
+Lyapunov exponent	https://en.wikipedia.org/wiki/Lyapunov_exponent		rate of exponential divergence from perturbed initial conditions of two .
+			img https://image.slidesharecdn.com/neuralnetwork3-120319092031-phpapp01/95/lyapunov-exponent-of-time-series-data-3-728.jpg?cb=1335792903
+
+vorticity & strain rate http://web.mit.edu/16.unified/www/FALL/fluids/Lectures/f11.pdf
+			http://web.mit.edu/16.unified/www/FALL/fluids/
+
+fft			http://vmm.math.uci.edu/odeandcm/PDF_Files/FFT_Appendix_K.pdf
+
+periodic BC 		https://www3.nd.edu/~gtryggva/CFD-Course/2013-Lecture-22.pdf
+
+model
+	OD of the tracer gradient w.r.t straining direction of the flow
+		
+	NS	solve numerically using spectral methods, extract "Theta", "Omega" 
+		-> SDE solve numerically using euler
+			----derive assocaited PDE---->fokker planck 
+		
+	1)	extract the emperical PDF from the NS data 
+	2)	extract the PDF from the FP 
+	3)	match the PDF's from 1) and 2)
+	4)	analysis of results
+
+
+https://en.wikipedia.org/wiki/Turbulence_modeling
+https://en.wikipedia.org/wiki/Chaotic_mixing
+https://en.wikipedia.org/wiki/Convection%E2%80%93diffusion_equation
+https://en.wikipedia.org/wiki/Lyapunov_exponent
+https://www.math.wisc.edu/~jeanluc/talks/mars2000.pdf
+https://www.cfd-online.com/W/images/3/31/Turbulence_Modeling_For_Beginners.pdf
+https://en.wikipedia.org/wiki/Reynolds_number
+https://en.wikipedia.org/wiki/Direct_numerical_simulation
+https://www.cfd-online.com/Wiki/Direct_numerical_simulation_(DNS)
+https://www.cfd-online.com/Wiki/Introduction_to_turbulence/Nature_of_turbulence#Why_study_turbulence.3F
+https://homepages.see.leeds.ac.uk/~amt6xw/Distance%20Learning/CFD5050TURB/node8.html
+https://en.wikipedia.org/wiki/Vorticity
+https://en.wikipedia.org/wiki/Flow_tracer
+https://en.wikipedia.org/wiki/Gradient
+
+
+http://web.mit.edu/16.unified/www/FALL/fluids/Lectures/f11.pdf
+https://www.researchgate.net/profile/Konrad_Bajer/publication/260309320_Steady_confined_Stokes_flows_with_chaotic_streamlines/links/00b7d530b6de292b34000000/Steady-confined-Stokes-flows-with-chaotic-streamlines.pdf
+file:///home/ian/Downloads/Does_the_tracer_gradient_vector_align_with_the_str.pdf
+https://pdfs.semanticscholar.org/9a52/259acfb59d999fd926b7caa874024769576d.pdf

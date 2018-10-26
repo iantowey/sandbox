@@ -1,0 +1,535 @@
+\chapter{Theory and Methods} \label{ch:theory}
+
+\section{Vorticity} \label{sec:theory-v}
+The Navier-Stokes equations are the complete equations of motion for a viscous Newtonian fluid. 
+\begin{equation}
+\label{eqn:ns}
+\frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla)\cdot \mathbf{u} = - \nabla p + (-1)^p \nu_p \nabla^{2 p} \mathbf{u} + \mathbf{F}(\mathbf{x},t) - \mathbf{D}(\mathbf{x},t) 
+\end{equation}
+In this setting, a forcing term $\mathbf{F}$ and dissapative term $\mathbf{D}$ are added, these are added to stop energy build up at small scales in the direct numercal simulation. 
+The viscoity term is taken to be hyperviscous of order $p$. This hyperviscosity also helps to stablise the direct numercal simulation of \ref{eqn:ns} and avoid singular solutions.
+The flow is assumed to be incompressible, $\nabla \cdot \mathbf{u} = 0$.
+
+The numerical simulation is not performed directly against the Navier-stokes equation. Instead the simulated data is generated from solving the 2-D Vorticity equation as we are intersted in the orientation dynamics of the fluid elements, and the 
+vorticity provides up with the spinning of a fluid element, from which simulated probability density function of the lyapunov exponent can be extracted.
+
+The following outlines the derivation of the vorticity transport eqaution from equation \ref{eqn:ns}. The vorticity equation can be derived by 
+
+\begin{itemize}
+ \item takes the curl of equation \ref{eqn:ns}
+ \item defining $\mathbf{\omega} = \nabla \times \mathbf{u}$
+\end{itemize}
+\begin{align}
+\nabla \times \bigg[ \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla)\cdot \mathbf{u} &= - \nabla p + (-1)^p \nu_p \nabla^{2 p} \mathbf{u} + \mathbf{F}(\mathbf{x},t) - \mathbf{D}(\mathbf{x},t) \bigg] \label{eqn:vort1}\\
+\frac{\partial \omega}{\partial t} + \underbrace{\nabla \times \bigg[ (\mathbf{u} \cdot \nabla)\cdot \mathbf{u} \bigg]}_\text{Convective term} &= \underbrace{\nabla \times \bigg[- \nabla p\bigg]}_\text{Pressure gradient} + \underbrace{\nabla \times \bigg[(-1)^p \nu_p \nabla^{2 p} \mathbf{u}\bigg]}_\text{Hyperviscosity} + \nabla \times \bigg[\mathbf{F}(\mathbf{x},t)\bigg] - \nabla \times \bigg[\mathbf{D}(\mathbf{x},t) \bigg]  \label{eqn:vort2}
+\end{align}
+\fbox{
+  \parbox{
+    \textwidth}{Using the following vector identities and results for any vectors $\omega$ and $\mathbf{u}$
+    \begin{enumerate}
+    \item incompressible fluid, $\nabla \cdot \mathbf{u} = 0$
+    \item for a scalar, the curl of the gradient of a scalar is zero, $\phi$, $\nabla \times \nabla \phi = 0$
+    \item the div of the curl of a vector is zero, $\nabla \cdot \omega = \nabla \cdot (\nabla \times \mathbf{u}) = 0$
+    \item $\frac{1}{2}\nabla(\mathbf{u} \cdot \mathbf{u}) = (\mathbf{u} \cdot \nabla)\mathbf{u} + \mathbf{u} \times (\nabla \times \mathbf{u})$
+    \item $\nabla \times (\mathbf{u} \times \omega) = (\omega \cdot \nabla)\mathbf{u} - (\mathbf{u} \cdot \nabla)\omega + \mathbf{u}\underbrace{\nabla\cdot \omega}_\text{$= 0\\$ (from 3)}  -\omega \underbrace{\nabla \cdot \mathbf{u}}_\text{$= 0\\$ (from 1)}$
+    \end{enumerate}
+  }
+}
+\\
+\\
+Applying these to the Convective term in \ref{eqn:vort2} yields 
+\begin{align*}
+ \nabla \times \bigg[ (\mathbf{u} \cdot \nabla)\cdot \mathbf{u} \bigg] &= \nabla \times \bigg[ \frac{1}{2}\nabla(\mathbf{u} \cdot \mathbf{u}) - \mathbf{u} \times (\underbrace{\nabla \times \mathbf{u}}_\text{$\omega$}) \bigg]\\
+ &= \frac{1}{2} \underbrace{\nabla \times \nabla(\mathbf{u} \cdot \mathbf{u})}_\text{$= 0$ (from 2)} - \nabla \times (\mathbf{u} \times \omega) \\
+ &= (\omega \cdot \nabla)\mathbf{u} - (\mathbf{u} \cdot \nabla)\omega
+\end{align*}
+
+The pressure term in \ref{eqn:vort2} goes away as the curl of the gradient of a scalar is zero from (2). 
+
+\begin{equation}
+\label{eqn:vort}
+\frac{\partial \omega}{\partial t} + (\mathbf{u} \cdot \nabla)\omega - (\omega \cdot \nabla)\mathbf{u} = (-1)^p \nu_p \nabla^{2 p} \omega + \nabla \times \bigg[\mathbf{F}(\mathbf{x},t)\bigg] - \nabla \times \bigg[\mathbf{D}(\mathbf{x},t) \bigg]
+\end{equation}
+For 2-d flows, vortex stretching is absent since $\mathbf{u} = u(x,y)\mathbf{e}_{x} + v(x,y)\mathbf{e}_{y}$ and $\mathbf{\omega} = \omega(x,y)\mathbf{e}_{z}$, therfore the vortex stretching term is zero $(\omega \cdot \nabla)\mathbf{u} = 0$
+and letting $\nabla \times \mathbf{F}(\mathbf{x},t) = \mathbf{Q}$ and $\nabla \times \mathbf{D}(\mathbf{x},t) = \mathbf{N}$, \ref{eqn:vort} is resolved to 
+\begin{equation}
+\label{eqn:vort_mat}
+\frac{\partial \omega}{\partial t} + (\mathbf{u} \cdot \nabla)\omega = (-1)^p \nu_p \nabla^{2 p} \omega + \mathbf{Q} - \mathbf{N}
+\end{equation}
+For the purposes of the direct numerical simulation we will define the $\mathbf{D}$ and $\mathbf{N}$ terms here as they will be required when outlining the numerical algorithm next.
+Defining the damping term as a constant, $\mathbf{N} = \nu_{0}\omega$ and from \cite{lilly} the forcing term is defined by the difference equation $\mathbf{Q}_{n+1} = R_{n}\mathbf{Q}_{n} + (1 - R^{2}_{n})^{1/2}x_{*}$ where $R_{n}$ is a dimenionless correlation coefficient
+and $x_{*} \sim \mathcal{N}(0,1)$, this forcing term is chosen so that a steady turbulent flow is produced in a long running simulation.
+
+Before solving the vorticity equation, we outline some assumptions that aid and simplify the numerical simulation.
+$\omega$ is defined on the 2-d grid domain $[0,L] \times [0,L]$ and $\omega$ is periodic over a wavelength $L$. This yields the initial conditions.
+\begin{align*}
+\omega(x,y,t) = \omega(x + L,y,t)	\\
+\omega(x,y,t) = \omega(x,y + L,t)	
+\end{align*}
+Discretizing \ref{eqn:vort_mat} and adding in the defined terms for damping and forcing yeilds the n-th time-step difference equation
+\begin{equation}
+\label{eqn:vort_mat_diff_eqn}
+\frac{\omega_{n+1} - \omega_{n}}{\Delta t} + \left(\mathbf{u} \cdot \nabla \omega \right)_{n} = (-1)^p \nu_p \nabla^{2p} \left(\frac{\omega_{n+1} - \omega_{n}}{2} \right) + \bigg[R_{n}Q_{n} + (1 - R^{2}_{n})^{1/2}x_{*}\bigg] - \nu_{0} \omega_{n}
+\end{equation}
+Since we have assumed periodic boundary conditions , \ref{eqn:vort_mat_diff_eqn} can be transformed to an equation in fourier space and solved using a simpler DFT (which used the FFT for optimal performance)
+approach rather than a finite-dufference methods.
+
+In Fourier space, the forcing term is also subject to a further constraint, we want to inject energy into the system only within a certain range to produce a steady flow, see \cite{main} and \cite{lilly}. We defined the binary scaling matrix $M^{*}$, with entries
+\begin{align*}
+ M^{*}_{ij} = 
+ \begin{cases}
+    1 & \text{if $k_{min}\frac{2\pi}{L} < kx^{2}_{i} + ky^{2}_{j} < k_{max}\frac{2\pi}{L}$} \\
+    0 & \text{otherwise} 
+  \end{cases}
+\end{align*}
+This makes the forcing term non-zero only in the specified range in fourier space.
+
+Another issue with computation in fourier space is that multiplication of two wave numbers can produce a number that is smaller than its factors or a wave numbers with infinite value. A method known as dealiasing is 
+used to resolved this, this is discussed in depth in \cite{bowman},.
+The dealiasing method used here is known as the $2/3$-rule, this truncates the computed waves numbers which blowup. The  binary matrix $D^{*}$ implements the truncating 2/3-rule. 
+\begin{align*}
+ D^{*}_{ij} = 
+ \begin{cases}
+    1 & \text{if $|kx_{i}| < \frac{2}{3}max_{1 \leq i \leq N}kx_{i} \cap |ky_{j}| < \frac{2}{3}max_{1 \leq j \leq N}ky_{j}$} \\
+    0 & \text{otherwise} 
+ \end{cases}
+\end{align*}
+
+Adding these yields the final representation of the numerical algorithm in wavespace. The wavenumber are then transformed back to real numbers using a reverse fourier transform.
+
+\begin{equation}
+\label{eqn:vort_mat_diff_eqn_fourier}
+\hat{\omega}_{n+1} = D^{*} \Biggr[ \frac{\hat{\omega}_{n} - {\Delta t} \Bigg( u \hat{\cdot} \omega  + \frac{|k^{2p}| \hat{\omega}_{n}}{2} + M^{*}\bigg[R_{n}Q_{n} + (1 - R^{2}_{n})^{1/2}x_{*}\bigg] - \nu_{0} \hat{\omega_{n}} \Bigg)}{1 + \frac{\nu_{p}|k^{2p}\Delta t|}{2}} \Biggr]
+\end{equation}
+
+
+
+\section{Advection-Diffusion equation \& relation to vorticity} \label{sec:theory}
+Now we focus on the velocity of the concentration of the tracer gradient. This is defined using the advection-diffusion equation with hyperdiffusivity to stablise the numerical simulation.
+
+\begin{equation}
+\frac{\partial \theta}{\partial t} + \mathbf{u} \cdot \nabla \theta = - (-1)^p \nu_p \nabla^{2p} \theta 
+\end{equation}
+
+We need to relate the velocity $\mathbf{u} = (u,v)$ to the vorticity $\omega$. In two-dimensional flow of an incompressible viscous fluid, a stream function may be defined. The stream function $\psi$ is a scalar function defined as
+
+\begin{equation*}
+  u = -\frac{\partial \psi}{\partial y}; \hspace*{1cm} v = \frac{\partial \psi}{\partial x}
+\end{equation*}
+
+As we are restricting outselves to 2-d. $\omega$ can be reduced to 1-d by computing the vorticity vector
+
+\begin{align*}
+  \bar{\omega} &= 
+      \begin{bmatrix}
+	\hat{x} & \hat{y} & \hat{z} \\
+	\partial_{x} & \partial_{y} & \partial_{z} \\
+	u(x,y,0,t) & u(x,y,0,t) & 0 
+      \end{bmatrix} \\ \\
+      &= \hat{x} \cdot 0 - \hat{y} \cdot 0 + \hat{z} \left( \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y} \right)
+\end{align*}
+
+Plugging the streamfunctions for $u$ and $v$ above gives;
+
+\begin{align*}
+  \omega &= \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y} \\
+	 &= \frac{\partial^{2} \psi}{\partial^{2} x} - \frac{\partial^{2} \psi}{\partial^{2} y} \\
+	 &= \nabla^{2} \psi
+\end{align*}
+
+This relation will allow us to solve the advection diffusion equation in the same numerical simulation as the vorticity.
+
+Using the same assumptions (periodic boundary conditions, scaling issue and dealiasing issue etc) as for the vorticity numerical scheme, a spectral method is also used to solve for $\theta$, the concentration of
+the tracer being mixed by the flow.
+Again discretizing and transforming to wave space yield the difference equation
+
+\begin{equation}
+\hat{\theta}_{n+1} = D^{*} \Biggr[ \frac{\hat{\theta}_{n} -\Delta t \hat{\theta}^{conv}_{n} }{1 + \Delta t(-1)^{p}*((-1)^p)\nu_{p}|\mathbf{k}|^{p}} \Biggr]
+\end{equation}
+
+where 
+\begin{align*}
+\theta^{conv} &= \mathbf{u} \cdot \nabla \theta \\
+  &= u \cdot \frac{\partial \theta}{\partial x} - v \cdot \frac{\partial \theta}{\partial y} \\
+\end{align*}
+
+Therefore
+\begin{align*}
+\hat{\theta}^{conv} &= u \cdot \frac{\partial \hat{\theta}}{\partial x} - v \cdot \frac{\partial \hat{\theta}}{\partial y} \\
+  &= u \cdot ik_{x}\hat{\theta} - v ik_{y}\hat{\theta} \\
+\end{align*}
+
+
+\section{Orientation Dynamics} \label{sec:theory-od}
+The context in which the orientation dynamics model is set, starts with defining the 2-D vector field $\mathcal{B} = (-\theta_{y},\theta_{x})$
+Where $\theta$ is the concentration of the passively advected tracer in an incompressible flow and diffusion , as outlined in \cite{main}. 
+
+In this setting, the governing equation is the advection-diffusion
+\begin{equation}
+  \label{eqn:adv-diff}
+  \frac{\partial \theta}{\partial t} + \mathbf{u} \cdot \nabla \theta = 0
+\end{equation}
+
+Where $\mathbf{u} = (u,v)$ is the velocity field of the fluid in 2-dimensions.
+
+Investigating the $\theta$ under the action of the advection-diffusion equation \ref{eqn:adv-diff} separately in the $x$ and $y$ direction
+\begin{align*}
+  \frac{\partial }{\partial t}\frac{\partial \theta}{\partial x} + \mathbf{u} \cdot \nabla \frac{\partial \theta}{\partial x} + \frac{\partial \mathbf{u}}{\partial x} \cdot (\nabla \theta) &= 0 \\
+  \frac{\partial }{\partial t}\frac{\partial \theta}{\partial y} + \mathbf{u} \cdot \nabla \frac{\partial \theta}{\partial y} + \frac{\partial \mathbf{u}}{\partial y} \cdot (\nabla \theta) &= 0
+\end{align*}
+
+Writing this in matrix notation
+\begin{align*}
+  \frac{\partial }{\partial t} \left( -\theta_{y} \atop \theta_{x} \right) + \mathbf{u} \cdot \nabla \left( -\theta_{y} \atop \theta_{x} \right) = \left( \mathbf{u}_{y} \cdot (\nabla \theta) \atop -\mathbf{u}_{x} \cdot (\nabla \theta) \right)  
+\end{align*}
+
+Subsituting in $\mathcal{B}$ the gradient of the vector field  and multiplying out the RHS
+\begin{align*}
+  \frac{\partial \mathcal{B}}{\partial t}  + \mathbf{u} \cdot \nabla \mathcal{B} &= 
+      \begin{bmatrix}
+	 u_{y} \cdot \theta_{x}  & v_{y} \cdot \theta_{y} \\
+	- u_{x} \cdot \theta_{x}  & -v_{x} \cdot \theta_{y} 
+      \end{bmatrix} \\
+  \frac{\partial \mathcal{B}}{\partial t}  + \mathbf{u} \cdot \nabla \mathcal{B} &= 
+      \begin{bmatrix}
+	-v_{y} & u_{y} \\
+	v_{x} & -u_{x}  
+      \end{bmatrix}\left( -\theta_{y} \atop \theta_{x} \right) 
+\end{align*}
+Making use of the incompressiblity condition
+\begin{align*}
+ \nabla \cdot \mathbf{u} = \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0 \Rightarrow \frac{\partial u}{\partial x} = -\frac{\partial v}{\partial y}
+\end{align*}
+and replacing the negative signed values in the matrix on the RHS above yields 
+\begin{align*}
+  \frac{\partial \mathcal{B}}{\partial t}  + \mathbf{u} \cdot \nabla \mathcal{B} &= 
+      \begin{bmatrix}
+	u_{x} & u_{y} \\
+	v_{x} & v_{y}  
+      \end{bmatrix}\left( -\theta_{y} \atop \theta_{x} \right) 
+\end{align*}
+
+\begin{equation}
+  \label{eqn:B}
+   \frac{\partial \mathcal{B}}{\partial t}  + \mathbf{u} \cdot \nabla \mathcal{B} = \mathcal{B} \cdot \nabla \mathbf{u}
+\end{equation}
+Writing \ref{eqn:B} using the material derivative operator, $\frac{d}{dt} = \frac{\partial}{\partial t} + \mathbf{u} \cdot \nabla $ and computing the dot product of \ref{eqn:B} with $\mathcal{B}$
+\begin{align*}
+  \mathcal{B}\left( \frac{d \mathcal{B}}{dt} \right) &= \mathcal{B} \left( \mathcal{B} \cdot \nabla \mathbf{u} \right)   \\
+  \frac{1}{2}\frac{d}{dt}\mathcal{B}^2  &= \langle \mathcal{B}\,,  \left( \nabla \mathbf{u} \right) \mathcal{B}\rangle   \\
+\end{align*}
+\fbox{
+  \parbox{
+    \textwidth}{From matrix theory , any $N \times N$ square matrix $\mathbf{M}$ can be written as a sum of its symmetric and anti-symmetric parts \\
+      \hspace*{2cm} $\mathbf{M} = \mathbf{S} + \mathbf{S}^{*}$ \\
+      \hspace*{2cm} where \\
+      \hspace*{4cm} $\mathbf{S} = \frac{\mathbf{M} + \mathbf{M}^{T}}{2}$ \\
+      \hspace*{4cm} $\mathbf{S}^{*} = \frac{\mathbf{M} - \mathbf{M}^{T}}{2}$ 
+  }
+}
+\\
+\\
+Therefore the 2x2 martix $\nabla \cdot \mathbf{u}$ can be decomposed into the sum of its symmetric and anti-symmetric parts
+\begin{align*}
+  \frac{1}{2}\frac{d}{dt}\mathcal{B}^2  &= \langle \mathcal{B}\,,  \left[ \left(\nabla \mathbf{u}\right)_{s} + \left(\nabla \mathbf{u}\right)_{s^{*}} \right] \mathcal{B}\rangle   \\
+\end{align*}
+
+Since we only care about the symmetric part of the $\nabla \cdot \mathbf{u}$
+\begin{align*}
+  \frac{1}{2}\frac{d}{dt}|\mathcal{B}|^2  &= \langle \mathcal{B}\,, \left(\nabla \mathbf{u}\right)_{s}  \mathcal{B}\rangle   \\
+\end{align*}
+\fbox{
+  \parbox{\textwidth}
+  {
+    \begin{align*}
+      \left(\nabla \mathbf{u}\right)_{s} &= \frac{1}{2} \left(\nabla \mathbf{u} + \left(\nabla \mathbf{u}\right)^{T} \right)\\
+      &= \frac{1}{2} \left(
+      \begin{bmatrix}
+	u_{x} & u_{y} \\
+	v_{x} & v_{y}  
+      \end{bmatrix} +
+      \begin{bmatrix}
+	u_{x} & v_{x} \\
+	u_{y} & v_{y}  
+      \end{bmatrix} \right) \\
+      &= \begin{bmatrix}
+	u_{x} & \frac{v_{x}+u_{y}}{2} \\
+	\frac{v_{x}+u_{y}}{2} & v_{y} 
+      \end{bmatrix} \\
+      &= \begin{bmatrix}
+	s & d \\
+	d & -s
+      \end{bmatrix} \\
+      &= \mathcal{S} \text{  (Rate-of-strain matrix)}
+    \end{align*}		       
+  }
+}
+
+
+\begin{equation*}
+  \frac{1}{2}\frac{d}{dt}|\mathcal{B}|^2  = \langle \mathcal{B}\,, \mathbf{S}  \mathcal{B}\rangle   
+\end{equation*}
+Regarding $\mathcal{B}$ as a complex-valued function of the complex variable $z = x + iy$ and $\bar{z} = x - iy$, $\mathcal{B} = \mathcal{B}_{1} + i\mathcal{B}_{2}$
+\begin{equation}. 
+  \label{eqn:three}
+  \frac{1}{2}\frac{d}{dt}|\mathcal{B}|^2  = \left(\mathcal{B}_{1},\mathcal{B}_{2}\right) 
+      \begin{bmatrix}
+	s & d \\
+	d & -s
+      \end{bmatrix} \left(\mathcal{B}_{1} \atop \mathcal{B}_{2} \right)
+\end{equation}
+This produces an equation for the magnitude of the tracer gradient, we want to understand the associated angle $\beta$ of this complex-valued function.
+
+The advection equation for $\beta$ is found by defining $\tan \beta = \frac{\theta_{y}}{\theta_{x}}$, and plugging this into the \ref{eqn:adv-diff}
+
+\begin{align*}
+ \partial_{t} \tan \beta + \mathbf{u} \cdot \nabla \tan \beta = 0
+\end{align*}
+Expanding all terms
+\begin{align*}
+ \left(\partial_{t} + \mathbf{u} \cdot \nabla \right) \tan \beta &= \frac{1}{\theta^{2}_{x}} \left[ -\theta_{x} \left(\mathcal{B} \cdot \nabla \right)u - \theta_{y} \left(\mathcal{B} \cdot \nabla \right)v \right] \\
+ \left(\partial_{t} + \mathbf{u} \cdot \nabla \right) \beta &= \frac{1}{|\mathcal{B}|^{2}} \left[ -\theta_{x} \left(\mathcal{B} \cdot \nabla \right)u - \theta_{y} \left(\mathcal{B} \cdot \nabla \right)v \right] \\
+ \left(\partial_{t} + \mathbf{u} \cdot \nabla \right) \beta &= \frac{1}{|\mathcal{B}|^{2}} \left( -\theta_{x}, -\theta_{y} \right) \left[\left( \nabla \mathbf{u}  \right)\mathcal{B} \right] \\
+\end{align*}
+Expanding $\nabla \mathbf{u}$ into the su of its symmetric and antisymmetric parts \\
+\fbox{
+  \parbox{\textwidth}
+  {
+    \begin{align*}
+      \nabla \mathbf{u} &= \frac{1}{2} \left(\nabla \mathbf{u} + \left(\nabla \mathbf{u}\right)^{T} \right) - \frac{1}{2} \left(\nabla \mathbf{u} - \left(\nabla \mathbf{u}\right)^{T} \right)\\
+      &= \frac{1}{2} \left(
+      \begin{bmatrix}
+	u_{x} & u_{y} \\
+	v_{x} & v_{y}  
+      \end{bmatrix} +
+      \begin{bmatrix}
+	u_{x} & v_{x} \\
+	u_{y} & v_{y}  
+      \end{bmatrix} \right) 
+      +\frac{1}{2} \left(
+      \begin{bmatrix}
+	u_{x} & u_{y} \\
+	v_{x} & v_{y}  
+      \end{bmatrix} +
+      \begin{bmatrix}
+	u_{x} & v_{x} \\
+	u_{y} & v_{y}  
+      \end{bmatrix} \right) \\
+      &= \begin{bmatrix}
+	u_{x} & \frac{v_{x}+u_{y}}{2} \\
+	\frac{v_{x}+u_{y}}{2} & v_{y} 
+      \end{bmatrix} +
+      \begin{bmatrix}
+	0 & \frac{-v_{x}+u_{y}}{2} \\
+	\frac{v_{x}-u_{y}}{2} & 0 
+      \end{bmatrix} \\
+      &= \begin{bmatrix}
+	u_{x} & \frac{v_{x}+u_{y}}{2} \\
+	\frac{v_{x}+u_{y}}{2} & v_{y} 
+      \end{bmatrix} -
+      \begin{bmatrix}
+	0 & \frac{v_{x}-u_{y}}{2} \\
+	\frac{-(v_{x}-u_{y})}{2} & 0 
+      \end{bmatrix} \\
+      &= \mathcal{S} - \frac{\omega}{2}      
+      \begin{bmatrix}
+	0 & 1 \\
+	-1 & 0 
+      \end{bmatrix} \
+    \end{align*}		       
+  }
+}
+\begin{align*}
+ \left(\partial_{t} + \mathbf{u} \cdot \nabla \right) \beta &= \frac{1}{|\mathcal{B}|^{2}} \left( -\theta_{x}, -\theta_{y} \right) \left[\left( \mathcal{S} - \frac{\omega}{2}      
+      \begin{bmatrix}
+	0 & 1 \\
+	-1 & 0 
+      \end{bmatrix}  \right)\mathcal{B} \right] \\
+ \left(\partial_{t} + \mathbf{u} \cdot \nabla \right) \beta &= \frac{1}{|\mathcal{B}|^{2}} \left[ \left( -\theta_{x}, -\theta_{y} \right) \mathcal{S} \mathcal{B}  - \frac{\omega}{2} \left( -\theta_{x}, -\theta_{y} \right)
+      \begin{bmatrix}
+	0 & 1 \\
+	-1 & 0 
+      \end{bmatrix}  \mathcal{B} \right] \\
+  \left(\partial_{t} + \mathbf{u} \cdot \nabla \right) \beta &= \frac{\omega}{2} - \frac{1}{|\mathcal{B}|^{2}} \left( -\theta_{x}, -\theta_{y} \right) \mathcal{S} \mathcal{B}  \\
+\end{align*}
+\begin{equation}
+  \label{eqn:four}
+  \frac{d\beta}{dt} = \frac{\omega}{2} - \frac{1}{|\mathcal{B}|^{2}} \left( \mathcal{B}_{2}, -\mathcal{B}_{1} \right) \begin{bmatrix}
+	s & d \\
+	d & -s
+      \end{bmatrix} \left(\mathcal{B}_{1} \atop \mathcal{B}_{2} \right)  \\
+\end{equation}
+
+Finally we want to re-write \ref{eqn:three} in terms of the the rate-of-strain matrix $\mathcal{S}$, which is the symmetric part of matrix $\nabla \mathbf{u}$.
+
+The eigenvalues $\mathcal{S}$ are real 
+\begin{align*}
+ \lambda_{(+)} &= \sqrt{s^{2} + d^{2}} \\
+ \lambda_{(-)} &= - \sqrt{s^{2} + d^{2}} \\
+\end{align*}
+
+And orthonormal eigenvectors 
+\begin{align*}
+ \mathbf{X}_{(+)} &= -\frac{1}{\mathcal{N}} \left( 1 \atop -\alpha + \sqrt{\alpha^{2} + 1} \right)  \\
+ \mathbf{X}_{(-)} &= -\frac{1}{\mathcal{N}} \left( \alpha - \sqrt{\alpha^{2} + 1} \atop  1 \right)  \\
+\end{align*}
+where $\alpha=s/d$ and $\mathcal{N} = \sqrt{2\sqrt{\alpha^2 +1}\left( -\alpha + \sqrt{(\alpha^2 + 1)} \right)}$
+
+Since $\mathbf{X}_{(+)}$ and $\mathbf{X}_{(-)}$ are orthonormal, they can be re-expressed in terms of an angle $\varphi$, the angle $\varphi$ is the angle between the x-axis and the expanding direction of the straining flow.
+\begin{align*}
+ \mathbf{X}_{(+)} &= \left(\cos \varphi \atop \sin \varphi \right)  \\
+ \mathbf{X}_{(-)} &= \left(-\sin \varphi \atop \cos \varphi \right)  \\
+\end{align*}
+
+$\varphi$ is the angle we want to model as part of the SDE model introduced later.
+
+Computing inner product $\mathcal{B}$ and $\mathcal{S}\mathcal{B}$ as outlined in \cite{stretch} yields the ODE model for the orientation dynamics
+\begin{equation}
+ \frac{d}{dt}|\mathbf{B}^{2}| = -2 \lambda \sin \zeta |\mathbf{B}^{2}|
+\end{equation}
+where the term $\Lambda = -2 \lambda \sin \zeta$ is the growth rate of the gradient (Lypunov exponent), and $\zeta = \beta - \varphi -\frac{1}{4}\pi$
+
+Using the result of \ref{eqn:four}, the rate of change of the angle $\zeta$ is model by the ODE , 
+\begin{equation}
+  \label{eqn:zeta_ode}
+ \frac{d \zeta}{dt} = -2 \lambda \cos \zeta + \omega - 2 \frac{d \varphi}{dt}
+\end{equation}
+
+The stochastic differential equation system outlined next aims to model $\Lambda$ and $\zeta$.
+
+\section{Stochastic Differential Equations Model}
+In this setting we denote the angle $\zeta$ = X and the $\lambda = \mu$, so rewritting \ref{eqn:zeta_ode} as the ODE
+\begin{equation}
+  \label{eqn:x_sde}
+ \frac{d X}{dt} = -2 \mu \cos X + \omega - 2 \frac{d \varphi}{dt}
+\end{equation}
+
+The terms $\omega$ and $\mu$ are modelled as two stochastic differential eqautions, decomposed into mean and random components. 
+\begin{align*}
+\mu &= \mu_{0} + Y(t) \\
+\frac{\omega}{2} -  \frac{d \varphi}{dt} &= Z(t) 
+\end{align*}
+
+Substituting these values into \ref{eqn:x_sde} yields the SDE for the angle X
+\begin{equation}
+  \label{eqn:x_sde1}
+ \frac{1}{2}\frac{d X}{dt} = -\mu_{0} \cos X + \omega - Y(t) \cos X + Z(t)
+\end{equation}
+
+As outlined in \cite{main}, the random parts of $Y(t)$ and $Z(t)$ are modelled as Ornstein-Uhlenbeck processes, with mean zero , time decay $\tau_{Y}$ and $\tau_{Z}$, and strengths $D{Y}$ and $D{Z}$
+This yields the system of stochastic differential equations to model the angle X.
+An Ornstein-Uhlenbeck process is a stochastic process that is a Gaussian process, a Markov process, and is temporally homogeneous.
+
+\begin{equation}
+ \begin{aligned}
+ \frac{1}{2}\frac{d X}{dt} &= -\mu_{0} \cos X + \omega - Y(t) \cos X + Z(t) \\ 
+ \frac{d Y}{dt} &= -\frac{Y}{\tau_{Y}} + \sqrt{\frac{2\sigma^{2}_{Y}}{\tau_{Y}}}dW_{Y} \\ 
+ \frac{d Z}{dt} &= -\frac{Z}{\tau_{Z}} + \sqrt{\frac{2\sigma^{2}_{Z}}{\tau_{Z}}}dW_{Z} + \sqrt{\frac{2k^{2}}{\tau_{Z}}}dW_{Y} 
+\end{aligned}
+\end{equation}
+
+Where $dW_{Y}$ and $dW_{Z}$ are uncorrelated weiner processes with $\langle dW_{Y,Z} \rangle = 0$ and $\langle dW^{2}_{Y,Z} \rangle = dt$, and cross-corrlation -$k \neq 0$.
+
+Since the solution of an SDE is a markov process, obtaining the probability distribution of the underlying equilbrium solution requires many simulations of some numerical method and averaging over these.
+This approach is outlined in the results section, but this direct numerical solution of the SDE's model converges very slowly.
+
+The SDE model can be solved for a single sample path using the below scheme.
+
+\begin{equation}
+\begin{aligned}
+ \label{eqn:sde_model_numeric}
+ y_{t} &= y_{t-1} - \frac{y_{t-1}}{\tau_{Y}}\Delta t + \frac{D_{Y}}{\tau_{y}}W_{Y_{t}} \\ 
+ z_{t} &= z_{t-1} - \frac{z_{t-1}}{\tau_{Z}}\Delta t + \frac{\sqrt{D_{Z}(1-k^{2})}}{\tau_{Z}}W_{Z_{t}} \\ 
+ x_{t} &= x_{t-1} + \frac{\Delta t}{\gamma}\left[\omega + \left(- \cos x_{t-1} + k\left(\frac{D_{Z}}{D_{Y}}\right)^{1/2} \right) y_{t-1} + z_{t-1} \right] 
+\end{aligned}
+\end{equation}
+
+\subsection{Fokker-Planck}\label{sec:der-sub}
+Theory tells us that every stochastic differential equation has a corresponding partial differential equation that has a solution which is the probability density function of the stochastic differential equation.
+
+The Fokker-Planck equation describes the evolution of conditional probability density for given initial states for a Markov process, since the random part of the SDE model is based on an Ornstein-Uhlenbeck process we should be able to 
+define a Fokker-Planck for the SDE model here
+
+There are two ways of dealing with the random terms in SDE's is the terms, the It\^o and Stratonovich interpretations. 
+For multiplicative non-constant random terms each interpretations can yield different results.
+
+The Itˆo interpretation requires the use of the It\^o calculus.  Stratonovich’s interpretation is based on the limit of the random terms
+as the correlation time limits to zero, and it allows the use of the ordinary rules of calculus
+
+Following the derivation outlined in \cite{risken} and \cite{hottovy}, the Stratonovich method is used to define the n-dimensional the Fokker-Planck equation as 
+
+\begin{align}
+ \frac{\partial P(\mathbf{X},t)}{\partial t} = \sum^{N}_{i=1}-\frac{\partial}{\partial X_{i}}(b(\mathbf{X})P(\mathbf{X},t)) - \sum^{N}_{i=1} \sum^{N}_{j=1} \frac{\partial}{\partial X_{i}\partial X_{j}}(\sigma(\mathbf{X})P(\mathbf{X},t))
+\end{align}
+where $\mathbf{X} = (X_1,X_2,...,X_N)$, $D^{1}(\mathbf{X}) = b(\mathbf{X})$ and $D^{2}(\mathbf{X}) = \sigma(\mathbf{X})$ and coefficients defined as 
+
+\begin{align}
+ D^{n}(\mathbf{Z}) = \frac{1}{n!}\frac{1}{\Delta t}\int^{\infty}_{-\infty}(\mathbf{Y} - \mathbf{Z})^{n}P(\mathbf{Y},\delta t | \mathbf{Z}) d \mathbf{Y}
+\end{align}
+
+Using this result and equating the coefficients of the \ref{eqn:sde_model_numeric}, yields the required Fokker-Planck equation
+
+
+
+
+\begin{align}
+ \label{eqn:fp}
+ \frac{\partial P}{\partial t} &= \mathcal{L}_{OU}P - \frac{\partial}{\partial x}(VP) 
+\end{align}
+where P is the probability density function of the triple $(X,Y,Z)$ and 
+\begin{align*}
+  V(x,y,z) &= 2(\omega - y \cos x + z) \\
+ \mathcal{L}_{OU} &= \frac{1}{\tau_{Y}} \frac{\partial}{\partial y}(y \circ) + \frac{1}{\tau^{2}_{Y}} \frac{\partial^{2}}{\partial y^{2}} + \frac{1}{\tau_{Z}} \frac{\partial}{\partial z}(z \circ)+ \frac{\rho}{\tau^{2}_{Z}} \frac{\partial^{2}}{\partial^{2} z} + \frac{2c\rho^{1/2}}{\tau_{Y}\tau_{Z}} \frac{\partial^{2}}{\partial y \partial z}\\
+\end{align*}
+where $c = \sqrt{\frac{k^{2}\tau_{Z}}{D_{Z}}}$, $\rho=\frac{D_{Z}}{D_{Y}}$
+
+By solving \ref{eqn:fp} for the equalibrium distribution of $P(x,y,z)$, its follows that the PDF of the X-angle can be computed by finding the marginal distribution of X
+\begin{align}
+  \label{eqn:x-marginal}
+  P_{X}(x) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} P(x,y,z) dY dZ 
+\end{align}
+Similarly the PDF of the lypunov exponent is computed via a coordinate transformation on the joint marginal of $P_{XY}$
+
+\begin{align}
+  \label{eqn:lambda-marginal}
+  P_{\Lambda}(\lambda) &= \int_{-\pi}^{\pi} P_{XY}\left(x,\frac{\lambda}{-2 \sin x}\right)\frac{1}{2|\sin x|}dX 
+\end{align}
+
+\subsubsection{Fokker-Planck numerical scheme}\label{sec:der-sub-fp}
+The Fokker-Planck is solved using the same pseudo-spectral approach as was done for the vorticity and tracer concentration. One other aspect that must be addressed while solving the Fokker-Planck PDF is the \textit{CFL} condition.  
+The general CFL condition for the n-dimensional case is defined as
+
+\begin{align*}
+  C=\Delta t\sum _{{i=1}}^{n}{\frac  {u_{{x_{i}}}}{\Delta x_{i}}}\leq C_{\max }.
+\end{align*}
+
+In this setting 
+\begin{align*}
+  C = \Delta t \min \{\Delta x, \Delta y, \Delta z\} = 0.1 V_{max}
+\end{align*}
+where $V_{max} = \left[\omega + \left( L_{y}/2 \right) \left( 1 + k\delta^{1/2}\right) + \left( L_{z}/2 \right) \right] / \gamma$.
+
+This is a necessary condition for convergence when numerically solving certain classes of PDE's which includes the Fokker-Planck equation.
+
+
+\label{sec:methods}
+
+\section{Using Uncertainty Quantification methods to fit Fokker-Planck parameters}\label{sec:der-sub}
+
+In \cite{main}, the values of the parameters in \ref{eqn:fp} are estimated using the moments of the $\omega$ and $\theta$, thus the model of the stochastic orientation dynamics 
+are shown as $D_{Y} = 0.05/\tau$, $D_{Z} = 0.9/\tau$, $k = 0$, $w = 0$ and $\tau = 0.1\sqrt{\langle || \omega||^{2}_{2}\rangle}$
+
+Uncertainty Quantification (UQ) methods try to encapsulate all the error and uncertainty in a models parameters so that the output can be evaluated and interpreted constrained by the 
+inherent uncertainty.
+
+A few Uncertainty Quantification methods as outlined in \cite{uqm} are breifly summaried.
+
+\subsection{Monte Carlo}
+In this method the SDE is solved directly by randomly sampling from some distribution that the unknown parameters are assumed to come from, this makes the SDE deterministic and a solution can be found. 
+This proceess is repeated $N$ times and average statistics can be computed. But this has very poor convergence. The Euler-Maruyama described in the result section is an example of this, but the parameters $D_Y$, $D_Z$, $k$ and $w$
+are not treated as unknown parameters drawn from some distribution.
+
+\subsection{Stochastic Collocation Method}
+
+\subsection{Stochastic Galerkin Method}
+In this setting the solution is represented by a \textit{Polynomial Chaos Expansion} 

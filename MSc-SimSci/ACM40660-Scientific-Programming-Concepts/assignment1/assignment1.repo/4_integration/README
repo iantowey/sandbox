@@ -1,0 +1,11 @@
+Determinant calculation
+
+#build
+make clean && make
+
+#run
+./simpson_integration_app
+
+#check for memory leak
+(echo -en '1\n'; sleep 1 ; echo '101\n') | valgrind --leak-check=full ./integration_app
+

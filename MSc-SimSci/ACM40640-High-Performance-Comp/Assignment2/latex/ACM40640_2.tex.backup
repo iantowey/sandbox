@@ -1,0 +1,181 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[titletoc, toc]{appendix}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{csvsimple}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\title{ACM40640 High Performance Comp \\ Assignment 2}
+
+\author{Ian Towey \\ \\ 04128591}
+
+\date{\today}
+
+\lstdefinestyle{custom_py_style}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange}
+}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+
+% Number the subsubsections and include them in the TOC
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setcounter{section}{-1}
+
+\newenvironment{aside}
+  {\begin{mdframed}[style=0,%
+      leftline=false,rightline=false,leftmargin=2em,rightmargin=2em,%
+          innerleftmargin=0pt,innerrightmargin=0pt,linewidth=0.5pt,%
+      skipabove=7pt,skipbelow=7pt]\footnotesize}
+  {\end{mdframed}}
+
+\begin{document}
+
+  \maketitle
+
+  \begin{abstract}
+    MPI code
+  \end{abstract}
+
+\tableofcontents
+
+\newpage
+\section{Communication in a ring}
+
+File main\_ring.c (see Appendix Listing 1 or accompanying file) demonstrates communication in a ring using MPI.
+Each processor sends a message to the its neighbour with rank one greater than its rank module the number of processors.
+The message sent along is the accumlated rank of the number of processors in the ring
+
+e.g for a ring of size 5 starting at processor with rank 0
+\begin{center}
+ $0  \xrightarrow[\text{     0     }]{\text{     msg = 0     }} 1 \xrightarrow[\text{     0+1     }]{\text{     msg = 1     }} 2 \xrightarrow[\text{     0+1+2     }]{\text{     msg = 3     }} 3 \xrightarrow[\text{     0+1+2+3     }]{\text{     msg = 6     }} 4 \xrightarrow[\text{     0+1+2+3+4     }]{\text{     msg = 10     }} 0$
+\end{center}
+
+
+e.g for a ring of size 6 starting at processor with rank 2
+\begin{center}
+ $2  \xrightarrow[\text{     2     }]{\text{     msg = 2     }} 3 \xrightarrow[\text{     2+3     }]{\text{     msg = 5     }} 4 \xrightarrow[\text{     2+3+4     }]{\text{     msg = 9     }} 5 \xrightarrow[\text{     2+3+4+5     }]{\text{     msg = 14     }} 0 \xrightarrow[\text{     2+3+4+5+0     }]{\text{     msg = 14     }} 1 \xrightarrow[\text{     2+3+4+5+0+1     }]{\text{     msg = 15     }} 2$
+\end{center}
+
+The origin processor is a commandline parameter, sample run of the program for a ring of size 6 starting at processor 2
+
+\begin{verbatim}
+mpicc -g -o main main_ring.c -lm
+mpirun -n 6 main 2
+
+-->>2 sending '2' to 3
+
+3 received: '2' from 2			3 sending '5' to 4
+
+4 received: '5' from 3			4 sending '9' to 5
+
+5 received: '9' from 4			5 sending '14' to 0
+
+0 received: '14' from 5			0 sending '14' to 1
+
+1 received: '14' from 0			1 sending '15' to 2
+
+<<--2 received '15' from 1
+
+
+Finished :: sum of ranks from 0 to 5 = 15
+
+\end{verbatim}
+
+The program uses asynchronous communication between the processors to active this using MPI function MPI\_Isend, MPI\_Irecv, MPI\_Wait
+\lstinputlisting[language=Python,style=CStyle, caption = Asynchronous Communication Calls,firstline=42, lastline=48]{/home/ian/Desktop/ACM40640-High-Performance-Comp/Assignment2/assignment2/main_ring.c}
+
+
+\newpage
+\section{Finding Determinent using Cramers Rule}
+File main\_det.c calculates the determinent of a 5x5 matrix using cramers rule. 5 Threads are used to calculate the determinant where each thread calculates the determinant 
+of a 4x4 matrix of the matrix A. The method then uses  a recursive definition for the determinant of an n × n matrix, the minor expansion formula.
+
+\begin{verbatim}
+mpicc -g -o main main_det.c -lm
+mpirun -n 5 main
+
+process 4, partial determinant -0.00386718112244897883
+process 0, partial determinant -0.01440665145577631201
+process 1, partial determinant -0.00361170218748875158
+process 2, partial determinant -0.00415480520912068444
+process 3, partial determinant -0.00409046542999916014
+****************************************************** 
+****** Matrix  (n=5)                ********** 
+****************************************************** 
+
+	1.000	-0.500	-0.333	-0.250	-0.200	
+	-0.500	0.333	-0.250	-0.200	-0.167	
+	-0.333	-0.250	0.200	-0.167	-0.143	
+	-0.250	-0.200	-0.167	0.143	-0.125	
+	-0.200	-0.167	-0.143	-0.125	0.111	
+
+****************************************************** 
+full determinant -0.03013080540483388525
+******************************************************
+
+\end{verbatim}
+
+The processor figures out which 4x4 submatrix of the 5x5 matrix using its rank. The processor with rank 0, aggregates the minors of the determinent from the 5 processors using MPI\_Reduce
+
+\lstinputlisting[language=Python,style=CStyle, caption = Asynchronous Communication Calls,firstline=42, lastline=48]{/home/ian/Desktop/ACM40640-High-Performance-Comp/Assignment2/assignment2/main_ring.c}
+
+
+\newpage
+\section{Finding Deadlock}
+
+\newpage
+\begin{appendix}
+\addappheadtotoc
+\appendixpage
+\lstinputlisting[language=C,style=CStyle, caption = main\_ring.c]{/home/ian/Desktop/ACM40640-High-Performance-Comp/Assignment2/assignment2/main_ring.c}
+
+\end{appendix}
+
+
+\end{document}

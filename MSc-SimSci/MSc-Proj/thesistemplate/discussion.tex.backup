@@ -1,0 +1,26 @@
+\chapter{Discussion} \label{ch:discussion}
+
+A model was derived for the orientation dynamics of a fluid under idealised conditions with a specfically chosen forcing term. The model described is a coupled system of stochastic 
+differential equations for the angle $X$, which is the angle between the rate of strain tensor's positive eigenvector and the x-axis. The associated Fokker-Planck equation is
+dervied and the probability density function of the angle $X$ is found via numerical simulation , from this the probability density function of the Lyapunov exponent $\Lambda$ is computed.
+
+The distributions (for $X$ and $\Lambda$) from the Fokker-Planck are checked against numerically simulation data from the vorticity and advection-diffusion equations. The vorticity and advection-diffusion equations
+are solved via a pseudo-spectral method.
+from this we seen thata the  and 
+
+
+A more numerical method could be used to fit the parameters of the FP PDE using uncertainly quantification methods, 
+The libraries documentation and examples were simple algebraic equations and time did not permit figuring how  how to encode the FP equation within the constraints of these frameworks, 
+
+A number of open source libraries were investigated to see if suitable for to fit the DNS data aginst the FP PDE
+UQ-PyL (Uncertainty Quantification Python Laboratory)  http://www.uq-pyl.com/
+OpenTURNS  (Treatment of Uncertainties, Risks'N Statistics) http://www.openturns.org/ 
+chaospy https://github.com/jonathf/chaospy
+unfortunately it was not possible to encode the Fokker-Planck equation within these framework, given more th=ime this could be implemented
+\cite{uqm} implements \textit{Python} code to implement these 3 methods to solve Burgers PDE. Future work could be to buid on the available code in \cite{uqm} to solve the \ref{eqn:fp}
+
+The Navier-Stokes equation that describe the motion of a viscous fluid were introduced, from this the vorticity transport equation was dervied. This euqation is required to extract the vorticity which describes the rotation of a fluid 
+particle, this will be required to extract data to fit 
+The advection-diffusion equation was also analysed, this describes the concentration of the tracer. This is solved for the concentration which is also required to fit the DNS data against the model.
+The orientation dynamics model is outlined , from this the SDE model is derived. The corresponding FP quation is then dervied, this was solved numerically and the results of the FP are compared to the DNS
+The marginal distribution of X v the X-angle observed in the DNS, also the FP lambda distribution v DNS lambda distribution, this comarison was done visually and using the moments of the extracted distributions.

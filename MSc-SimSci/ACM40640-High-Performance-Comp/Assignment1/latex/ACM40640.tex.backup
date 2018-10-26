@@ -1,0 +1,226 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[titletoc, toc]{appendix}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{csvsimple}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{ACM40640 High Performance Comp \\ Assignment 1}
+
+\author{Ian Towey \\ \\ 04128591}
+
+\date{\today}
+
+\lstdefinestyle{custom_py_style}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange}
+}
+
+% Number the subsubsections and include them in the TOC
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setcounter{section}{-1}
+
+\begin{filecontents*}{a500.csv}
+name,givenname,matriculation,gender,grade
+500,1,0.136818,1,1
+500,5,0.032769,0.239507959479016,4.17522658610272
+500,10,0.03897,0.284830943296935,3.5108545034642
+500,15,0.061737,0.451234486690348,2.21614266971184
+500,20,0.109617,0.801188440117528,1.24814581679849
+500,25,0.094764,0.692628162961014,1.44377611751298
+500,30,0.085122,0.622154979607946,1.60731655741172
+500,35,0.074294,0.543013346197138,1.841575362748
+500,40,0.061368,0.448537473139499,2.22946812671099
+\end{filecontents*}
+
+\begin{filecontents*}{a1000.csv}
+name,givenname,matriculation,gender,grade
+1000,1,8.32384,1,1
+1000,5,1.789278,0.214958240427495,4.6520663641983
+1000,10,0.98218,0.1179960210672,8.47486204158097
+1000,15,0.670694,0.0805750711210211,12.4107864391213
+1000,20,0.627197,0.0753494781254805,13.2714920511418
+1000,25,0.687821,0.0826326551207135,12.1017532177703
+1000,30,0.638659,0.0767264868137783,13.0333088549602
+1000,35,0.546503,0.0656551543518376,15.2310966270999
+1000,40,0.499063,0.0599558617176688,16.6789363266762
+\end{filecontents*}
+
+\begin{filecontents*}{a2000.csv}
+name,givenname,matriculation,gender,grade
+2000,1,81.919144,1,1
+2000,5,17.612401,0.214997375949143,4.65121955831008
+2000,10,9.42893,0.1151004458738,8.68806365091267
+2000,15,6.309168,0.0770170157051446,12.9841437095985
+2000,20,4.834022,0.0590096742221818,16.9463738476987
+2000,25,5.673005,0.0692512729381059,14.4401677770423
+2000,30,4.915481,0.0600040571713005,16.6655397508403
+2000,35,4.304687,0.0525479978159928,19.0302207802797
+2000,40,4.444649,0.0542565361766964,18.4309591151067
+\end{filecontents*}
+
+\begin{filecontents*}{a3000.csv}
+name,givenname,matriculation,gender,grade
+3000,1,379.905421,1,1
+3000,5,72.595633,0.191088699942505,5.23317182178162
+3000,10,38.912887,0.102427827688197,9.76297186584999
+3000,15,26.133908,0.0687905635334433,14.5368775691718
+3000,20,19.820675,0.0521726564149239,19.1671283142476
+3000,25,21.94133,0.057754716798316,17.3146031256993
+3000,30,19.670081,0.0517762577544267,19.3138717120687
+3000,35,17.172593,0.0452022847023286,22.1227755761754
+3000,40,17.271112,0.0454616097726071,21.9965814013597
+\end{filecontents*}
+
+\begin{filecontents*}{a4000.csv}
+name,givenname,matriculation,gender,grade
+4000,1,732.608332,1,1
+4000,5,183.152083,0.25,4
+4000,10,102.377162,0.139743376546801,7.15597422010976
+4000,15,67.713204,0.0924275646922345,10.8192832228113
+4000,20,51.827723,0.0707441080536332,14.1354527961801
+4000,25,55.588827,0.0758779617592446,13.1790572231359
+4000,30,50.389406,0.0687808257141143,14.5389356643736
+4000,35,43.283283,0.0590810684364425,16.9258956627666
+4000,40,42.753439,0.0583578388786329,17.1356585373167
+\end{filecontents*}
+
+\begin{filecontents*}{a5000.csv}
+name,givenname,matriculation,gender,grade
+5000,1,1548.988168,1,1
+5000,5,387.247042,0.25,4
+5000,10,209.308222,0.135125771987175,7.40051276151015
+5000,15,141.228929,0.0911749566056078,10.9679240575421
+5000,20,107.211277,0.0692137481840339,14.4479966225941
+5000,25,111.409326,0.0719239360903885,13.9035772283552
+5000,30,105.991707,0.0684264148620663,14.6142392819468
+5000,35,97.041795,0.0626485062989842,15.9620725070059
+5000,40,93.206691,0.0601726294141712,16.618851623002
+\end{filecontents*}
+
+
+\newenvironment{aside}
+  {\begin{mdframed}[style=0,%
+      leftline=false,rightline=false,leftmargin=2em,rightmargin=2em,%
+          innerleftmargin=0pt,innerrightmargin=0pt,linewidth=0.5pt,%
+      skipabove=7pt,skipbelow=7pt]\footnotesize}
+  {\end{mdframed}}
+
+\begin{document}
+
+  \maketitle
+
+  \begin{abstract}
+    OpenMP code analysis
+  \end{abstract}
+
+\tableofcontents
+
+\newpage
+\section{Matrix-Matrix Multiplication}
+
+\noindent\begin{tabular}{|c|c|c|}
+\hline
+\rowcolor{lightgray}\multicolumn{3}{ |c| }{\bfseries Matrix Dim : 500} \\
+\hline
+\bfseries No. Threads & \bfseries Time Taken (s) & \bfseries Relative speedup% specify table head
+\csvreader[head to column names]{a500.csv}{}% use head of csv as column names
+{\\\hline\givenname & \matriculation & \grade}% specify your coloumns here
+\\\hline
+\end{tabular}
+
+\noindent\begin{tabular}{|c|c|c|}
+\hline
+\rowcolor{lightgray}\multicolumn{3}{ |c| }{\bfseries Matrix Dim : 1000} \\
+\hline
+\bfseries No. Threads & \bfseries Time Taken (s) & \bfseries Relative speedup% specify table head
+\csvreader[head to column names]{a1000.csv}{}% use head of csv as column names
+{\\\hline\givenname & \matriculation & \grade}% specify your coloumns here
+\\\hline
+\end{tabular}
+
+\noindent\begin{tabular}{|c|c|c|}
+\hline
+\rowcolor{lightgray}\multicolumn{3}{ |c| }{\bfseries Matrix Dim : 2000} \\
+\hline
+\bfseries No. Threads & \bfseries Time Taken (s) & \bfseries Relative speedup% specify table head
+\csvreader[head to column names]{a2000.csv}{}% use head of csv as column names
+{\\\hline\givenname & \matriculation & \grade}% specify your coloumns here
+\\\hline
+\end{tabular}
+
+\noindent\begin{tabular}{|c|c|c|}
+\hline
+\rowcolor{lightgray}\multicolumn{3}{ |c| }{\bfseries Matrix Dim : 3000} \\
+\hline
+\bfseries No. Threads & \bfseries Time Taken (s) & \bfseries Relative speedup% specify table head
+\csvreader[head to column names]{a3000.csv}{}% use head of csv as column names
+{\\\hline\givenname & \matriculation & \grade}% specify your coloumns here
+\\\hline
+\end{tabular}
+
+\noindent\begin{tabular}{|c|c|c|}%
+\hline
+\rowcolor{lightgray}\multicolumn{3}{ |c| }{\bfseries Matrix Dim : 4000} \\
+\hline
+\bfseries No. Threads & \bfseries Time Taken (s) & \bfseries Relative speedup% specify table head
+\csvreader[head to column names]{a4000.csv}{}% use head of csv as column names
+{\\\hline\givenname & \matriculation & \grade}% specify your coloumns here
+\\\hline
+\end{tabular}
+
+\noindent\begin{tabular}{|c|c|c|}%
+\hline
+\rowcolor{lightgray}\multicolumn{3}{ |c| }{\bfseries Matrix Dim : 5000} \\
+\hline
+\bfseries No. Threads & \bfseries Time Taken (s) & \bfseries Relative speedup% specify table head
+\csvreader[head to column names]{a5000.csv}{}% use head of csv as column names
+{\\\hline\givenname & \matriculation & \grade}% specify your coloumns here
+\\\hline
+\end{tabular}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{/home/ian/Desktop/ACM40640-High-Performance-Comp/Assignment1/Relative_Speedup.png}
+\caption{\label{fig:data}Todo}
+\end{figure}
+
+
+\newpage
+\section{Q2}
+
+\newpage
+\section{Q3}
+
+
+\newpage
+\begin{appendix}
+\addappheadtotoc
+\appendixpage
+
+\end{appendix}
+
+
+\end{document}

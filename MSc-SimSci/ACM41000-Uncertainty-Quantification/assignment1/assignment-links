@@ -1,0 +1,33 @@
+https://apmonitor.com/pdc/index.php/Main/SolveDifferentialEquations
+
+
+https://www.gnu.org/software/gsl/manual/html_node/ODE-Example-programs.html#ODE-Example-programs
+
+http://www.physics.nyu.edu/pine/pymanual/html/chap5/chap5_plot.html
+
+#for loop plot
+http://sam-dolan.staff.shef.ac.uk/mas212/notebooks/ODE_Example.html
+
+#3d plot
+https://matplotlib.org/examples/mplot3d/index.html
+
+https://scipython.com/
+
+#sir model
+https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/
+
+#ode systm trajectories and df
+https://waterprogramming.wordpress.com/2018/02/12/plotting-trajectories-and-direction-fields-for-a-system-of-odes-in-python/
+
+https://www.scribd.com/document/143100431/3-7-6
+
+
+t = 0
+N = 1000
+x0 = 999
+y0 = 1
+z0 = 0
+
+
+a = N/x0 = 1000/999
+b = 0.5

@@ -1,0 +1,22 @@
+\chapter{Discussion} \label{ch:discussion}
+
+%Summary
+A model was derived for the orientation dynamics of a fluid under idealised conditions with a specfically chosen forcing term. The model described is a coupled system of stochastic 
+differential equations for the angle $X$, which is the angle between the rate of strain tensor's positive eigenvector and the x-axis. The associated Fokker-Planck equation is
+dervied and the probability density function of the angle $X$ is found via numerical simulation , from this the probability density function of the Lyapunov exponent $\Lambda$ is computed.
+
+The distributions (for $X$ and $\Lambda$) from the Fokker-Planck are checked against numerically simulation data from the vorticity and advection-diffusion equations. The vorticity and advection-diffusion equations
+are solved via a pseudo-spectral method. From extracting snapshots of vorticity ($\omega$) and concentration ($\theta$) at fixed time intervals, the distributions of the angle $X$ and the Lyapunov exponent
+From this, a comparison of the distributuons from the Fokker-Planck solution versus the numerical simulation of forced turbulence , shows that the stochastic model is a good fit for the observed experimental data.
+A number of methods from Uncertainty Quantification are listed that could be employeed to fit the parameters of the Fokker-Planck more accurately, but time constrainst limited implementation of these methods.
+
+%Future work
+The libraries documentation and examples were simple algebraic equations and time did not permit figuring how  how to encode the FP equation within the constraints of these frameworks, 
+A number of open source libraries were investigated to see if suitable for to fit the numerically simulationed data aginst the Fokker-Planck partial differential equation.
+UQ-PyL (Uncertainty Quantification Python Laboratory)  http://www.uq-pyl.com/
+OpenTURNS  (Treatment of Uncertainties, Risks'N Statistics) http://www.openturns.org/ 
+chaospy https://github.com/jonathf/chaospy
+unfortunately it was not possible to encode the complexity of the Fokker-Planck equation within these framework, given more time this could be investigated further.
+
+%overview
+The distribution of the Lyapunov exponent is found to be modelled accurately by the stochastic model. 
