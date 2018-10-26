@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="entity" type="com.lucidlogic.horsetracker.model.Entity"/>
+        <variable name="eventHandler" type="com.lucidlogic.horsetracker.handler.EntityClickHandler"/>
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:clickable="true">
+
+        <TextView
+            android:text="@{entity.name}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:clickable="true" />
+
+        <TextView
+            android:text="View Profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+</layout>

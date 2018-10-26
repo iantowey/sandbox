@@ -1,0 +1,84 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'me.tatarka.retrolambda'
+
+retrolambda {
+    jvmArgs '-Xmx1g'
+    incremental true
+    javaVersion JavaVersion.VERSION_1_7
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.lucidlogic.horsetracker"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue 'string', 'parse_server_url', 'http://192.168.50.183:1337/parse/'
+        }
+        debug {
+            minifyEnabled false
+            resValue 'string', 'parse_server_url', 'http://192.168.50.183:1337/parse/'
+        }
+    }
+    compileOptions {
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {
+        transitive = true;
+    }
+    compile('com.parse:parse-android:1.13.0') {
+        exclude group: 'com.parse.bolts', module: 'bolts-tasks';
+    }
+    compile('com.infstory:rxparse:2.0.1') {
+        exclude group: 'com.parse.bolts', module: 'bolts-android';
+    }
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.0'
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile 'org.powermock:powermock-api-mockito:1.6.2'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.2'
+
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.annimon:stream:1.1.1'
+    compile 'com.parse.bolts:bolts-android:1.4.0'
+}

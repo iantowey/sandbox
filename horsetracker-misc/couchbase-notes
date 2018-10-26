@@ -1,0 +1,14 @@
+##Couchbase nq1l query rest api examples 
+
+http://localhost:8093/query/service?statement=select%20h.*%20from%20`horsetracker-test`%20h
+
+
+
+http://localhost:8093/query/service?statement=select%20distinct%20h._type%20from%20`horsetracker-test`%20h
+
+
+http://localhost:8093/query/service?statement=select%20h.*%20from%20`horsetracker-test`%20h%20where%20_type='Racecard'
+
+
+
+curl -G -v "http://localhost:8093/query/service" --data-urlencode "statement=select h.* from \`horsetracker-test\` h where _type='Racecard'"

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">HorseTracker</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_other">Other</string>
+    <string name="parse_app_id">9c188b00235ac01ec4bff34fcd3f7838</string>
+    <string name="parse_client_id">9c188b00235ac01ec4bff34fcd3f7838</string>
+    <!--<string name="parse_server_url">http://192.168.1.102:1337/parse/</string>-->
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+
+</resources>
