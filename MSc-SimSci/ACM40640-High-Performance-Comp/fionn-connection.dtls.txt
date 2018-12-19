@@ -1,11 +1,11 @@
 ssh -Y ph5xx10@fionn.ichec.ie
-PASSWORD :: Lecarrowethel
+PASSWORD :: **********
 
 qsub -I -l walltime=00:20:00 -l nodes=3:ppn=24 -N mma -j oe -r n -A ph5xx
 
 
 ucd connect password
-Lecarr0wethel
+*********
 
 
 scp -r ph5xx10@fionn.ichec.ie:/ichec/home/users/ph5xx10/PH504/assignment2 .
